@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { DEFAULT_CONFIG_SCHEMA } from '~/composables/config'
+import { configBaseConfig, configBaseSchema } from '~/composables/config'
 </script>
 
 <template>
-  <AutoForm class="space-y-4" :schema="DEFAULT_CONFIG_SCHEMA" :field-config="DEFAULT_FIELD_CONFIG" />
+  <AutoForm class="space-y-4" :schema="configBaseSchema" :field-config="configBaseConfig" />
 </template>
 
 <style scoped lang="postcss">

@@ -14,7 +14,44 @@ component:
       content: 退出将关闭所有实例。 如需要最小化请点击最小化按钮！
       confirm: 确认
       cancel: 取消
+  drawerList:
+    dropFile:
+      title: 松开以添加实例配置
+  instance:
+    display:
+      back: 返回
+      more: 更多
+      instanceAction: 实例操作
+      log: 日志
+      share: 分享
+      delete: 删除
+    status:
+      overview:
+        title: 概览
+        ip: 虚拟IP
+        nat: NAT类型
+        device: '{time}设备'
+        bandwidth: '{time}带宽'
+        history: 历史
+        realTime: 实时
+      detail:
+        title: 详情
+        noData: 暂无数据
+      config: 配置
 
 page:
   index:
     search: 搜索
+
+form:
+  instance:
+    instance_name: 实例名称
+    hostname: 主机名
+    instance_id: 实例ID
+    ipv4: IPv4
+    dhcp: DHCP
+    listeners: 监听地址
+    exit_node: 出口节点
+    rpc_portal: RPC端口
+    network_name: 组网名称
+    network_secret: 组网密钥

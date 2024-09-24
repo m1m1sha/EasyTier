@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ArrowUpDown, PlaneTakeoff, Radar, Users } from 'lucide-vue-next'
 
+const { t } = useI18n()
 const instanceStore = useInstanceStore()
 const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTotal, currentPeers } = storeToRefs(instanceStore)
 </script>
@@ -9,13 +10,13 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
   <Tabs default-value="overview" style="height: calc(100% - 96px);">
     <TabsList>
       <TabsTrigger value="overview">
-        概览
+        {{ t('component.instance.status.overview.title') }}
       </TabsTrigger>
       <TabsTrigger value="detail">
-        详情
+        {{ t('component.instance.status.detail.title') }}
       </TabsTrigger>
       <TabsTrigger value="config">
-        配置
+        {{ t('component.instance.status.config') }}
       </TabsTrigger>
     </TabsList>
     <TabsContent value="overview" class="h-full overflow-y-scroll">
@@ -23,7 +24,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              虚拟IP
+              {{ t('component.instance.status.overview.ip') }}
             </CardTitle>
             <PlaneTakeoff class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -42,7 +43,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              Nat类型
+              {{ t('component.instance.status.overview.nat') }}
             </CardTitle>
             <Radar class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -55,7 +56,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ currentInstance?.status ? '实时' : '历史' }}设备
+              {{ t('component.instance.status.overview.device', { time: t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
             </CardTitle>
             <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -74,7 +75,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ currentInstance?.status ? '实时' : '历史' }}流量
+              {{ t('component.instance.status.overview.bandwidth', { time: t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
             </CardTitle>
             <ArrowUpDown class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -109,7 +110,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <PeerDetail v-for="peer in currentPeers" :id="peer.id" :key="peer.id" />
       </div>
       <div v-else class="w-full h-full flex text-center justify-center align-middle">
-        Nothing here
+        {{ t('component.instance.status.detail.noData') }}
       </div>
     </TabsContent>
     <TabsContent value="config" class="h-full overflow-y-scroll">

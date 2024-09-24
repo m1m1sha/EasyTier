@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ChevronLeft, FileClock, MoreVertical, Share2, Trash2 } from 'lucide-vue-next'
 
+const { t } = useI18n()
 const instanceStore = useInstanceStore()
 const { selectedId, currentInstance } = storeToRefs(instanceStore)
 
@@ -21,10 +22,10 @@ function back() {
             <TooltipTrigger as-child>
               <Button variant="ghost" size="icon" @click="back()">
                 <ChevronLeft class="size-4" />
-                <span class="sr-only">返回</span>
+                <span class="sr-only">{{ t('component.instance.display.back') }}</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>返回</TooltipContent>
+            <TooltipContent>{{ t('component.instance.display.back') }}</TooltipContent>
           </Tooltip>
         </div>
         <div class="flex items-center">
@@ -34,20 +35,20 @@ function back() {
             <DropdownMenuTrigger as-child>
               <Button variant="ghost" size="icon">
                 <MoreVertical class="size-4" />
-                <span class="sr-only">更多</span>
+                <span class="sr-only">{{ t('component.instance.display.more') }}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>实例操作</DropdownMenuLabel>
+              <DropdownMenuLabel>{{ t('component.instance.display.instanceAction') }}</DropdownMenuLabel>
               <DropdownMenuItem>
-                <FileClock class="mr-2 h-4 w-4" />日志
+                <FileClock class="mr-2 h-4 w-4" />{{ t('component.instance.display.log') }}
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Share2 class="mr-2 h-4 w-4" />分享
+                <Share2 class="mr-2 h-4 w-4" />{{ t('component.instance.display.share') }}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem @click="instanceStore.deleteInstance(selectedId)">
-                <Trash2 class="mr-2 h-4 w-4" />删除
+                <Trash2 class="mr-2 h-4 w-4" />{{ t('component.instance.display.delete') }}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

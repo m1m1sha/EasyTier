@@ -2,17 +2,21 @@ import { z } from 'zod'
 import type { Config } from '~/components/ui/auto-form/interface'
 import type { ZodObjectOrWrapped } from '~/components/ui/auto-form/utils'
 
-export const DEFAULT_CREATE_CONFIG_SCHEMA: ZodObjectOrWrapped = z.object({
+const { t } = useI18n()
+
+export const createConfigWithNameSchema = computed<ZodObjectOrWrapped>(() => z.object({
   instance_name: z.string().describe('Instance username'),
-})
+}))
 
-export const DEFAULT_CREATE_FIELD_CONFIG: Config<z.infer<any>> = {
-  instance_name: {
-    label: '实例名称',
-  },
-}
+export const createConfigWithNameConfig = computed<Config<z.infer<any>>>(() => (
+  {
+    instance_name: {
+      label: t('form.instance.instance_name'),
+    },
+  }
+))
 
-export const DEFAULT_CONFIG_SCHEMA: ZodObjectOrWrapped = z.object({
+export const configBaseSchema = computed<ZodObjectOrWrapped>(() => z.object({
   network_name: z.string().describe('Your username'),
   network_secret: z.string().optional(),
   hostname: z.string().describe('The hostname to use').optional(),
@@ -25,7 +29,44 @@ export const DEFAULT_CONFIG_SCHEMA: ZodObjectOrWrapped = z.object({
   cidr: z.array(z.string()).describe('The CIDR of the proxy network').optional(),
   exit_node: z.array(z.string()).describe('The exit node to use').optional(),
   instance_id: z.string().describe('The ID of the instance').uuid().optional(),
+}))
 
+export const configBaseConfig = computed<Config<z.infer<any>>>(() => (
+  {
+    instance_name: {
+      label: t('form.instance.instance_name'),
+    },
+    hostname: {
+      label: t('form.instance.hostname'),
+    },
+    instance_id: {
+      label: t('form.instance.instance_id'),
+    },
+    ipv4: {
+      label: t('form.instance.ipv4'),
+    },
+    dhcp: {
+      label: t('form.instance.dhcp'),
+    },
+    listeners: {
+      label: t('form.instance.listeners'),
+    },
+    exit_node: {
+      label: t('form.instance.exit_node'),
+    },
+    rpc_portal: {
+      label: t('form.instance.rpc_portal'),
+    },
+    network_name: {
+      label: t('form.instance.network_name'),
+    },
+    network_secret: {
+      label: t('form.instance.network_secret'),
+    },
+  }
+))
+
+export const configCommonSchema = computed<ZodObjectOrWrapped>(() => z.object({
   flags: z.object({
     default_protocol: z.string().describe('The default protocol to use').default('tcp').optional(),
     dev_name: z.string().describe('The name of the device').optional(),
@@ -38,39 +79,6 @@ export const DEFAULT_CONFIG_SCHEMA: ZodObjectOrWrapped = z.object({
     use_smoltcp: z.boolean().describe('Whether to use smoltcp').default(false).optional(),
     foreign_network_whitelist: z.string().describe('A comma-separated list of networks to allow').default('*').optional(),
   }).optional(),
-})
-
-export const DEFAULT_FIELD_CONFIG: Config<z.infer<any>> = {
-  instance_name: {
-    label: '实例名称',
-  },
-  hostname: {
-    label: '主机名',
-  },
-  instance_id: {
-    label: '实例id',
-  },
-  ipv4: {
-    label: 'Ipv4',
-  },
-  dhcp: {
-    label: 'DHCP',
-  },
-  listeners: {
-    label: '监听地址',
-  },
-  exit_node: {
-    label: '出口节点',
-  },
-  rpc_portal: {
-    label: 'RPC端口',
-  },
-  network_name: {
-    label: '组网名称',
-  },
-  network_secret: {
-    label: '组网密码',
-  },
-}
+}))
 
 export const DEFAULT_DEPENDENCIES = {}

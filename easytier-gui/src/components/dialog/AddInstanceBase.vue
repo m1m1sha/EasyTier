@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DEFAULT_CREATE_CONFIG_SCHEMA } from '~/composables/config'
+import { createConfigWithNameConfig, createConfigWithNameSchema } from '~/composables/config'
 
 const { t } = useI18n()
 
@@ -31,7 +31,7 @@ function submitInstanceFromDefault(data: any) {
       </DialogHeader>
       <div class="grid gap-4 p-2 overflow-y-auto">
         <AutoForm
-          :schema="DEFAULT_CREATE_CONFIG_SCHEMA" :field-config="DEFAULT_CREATE_FIELD_CONFIG" class="space-y-4"
+          :schema="createConfigWithNameSchema" :field-config="createConfigWithNameConfig" class="space-y-4"
           @submit="submitInstanceFromDefault"
         >
           <div class="w-full flex justify-end">
