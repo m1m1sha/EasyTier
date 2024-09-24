@@ -1,27 +1,24 @@
 <script setup lang="ts">
-import { getEasytierVersion } from '~/composables/network'
-
 const { t } = useI18n()
-
-const etVersion = ref('')
-
-onMounted(async () => {
-  etVersion.value = await getEasytierVersion()
-})
 </script>
 
 <template>
-  <Card>
-    <template #title>
-      Easytier - {{ t('about.version') }}: {{ etVersion }}
-    </template>
-    <template #content>
-      <p class="mb-1">
-        {{ t('about.description') }}
-      </p>
-    </template>
-  </Card>
+  <div class="pb-2 space-y-2">
+    <h3 class="text-xl font-medium">
+      EasyTier GUI
+      <span class="text-sm">{{ `v${pkg.version}` }}</span>
+    </h3>
+    <p class="text-sm text-muted-foreground">
+      {{ t('component.about.description') }}
+    </p>
+    <div class="flex flex-wrap space-x-2">
+      <Image src="https://img.shields.io/github/license/EasyTier/EasyTier" alt="badge" />
+      <Image src="https://img.shields.io/github/v/release/EasyTier/EasyTier" alt="badge" />
+      <Image src="https://img.shields.io/github/last-commit/EasyTier/EasyTier" alt="badge" />
+    </div>
+  </div>
+  <Separator />
 </template>
 
-<style scoped lang="postcss">
+<style lang="postcss" scoped>
 </style>

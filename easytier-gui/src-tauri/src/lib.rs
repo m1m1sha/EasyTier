@@ -1,5 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+mod command;
+mod constant;
 
 use std::collections::BTreeMap;
 
@@ -16,8 +18,9 @@ use easytier::{
 use serde::{Deserialize, Serialize};
 
 use tauri::Manager as _;
+use tauri::Emitter;
+use constant::*;
 
-pub const AUTOSTART_ARG: &str = "--autostart";
 
 #[derive(Deserialize, Serialize, PartialEq, Debug)]
 enum NetworkingMethod {
@@ -286,11 +289,11 @@ fn check_sudo() -> bool {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    #[cfg(not(target_os = "android"))]
-    if !check_sudo() {
-        use std::process;
-        process::exit(0);
-    }
+    // #[cfg(not(target_os = "android"))]
+    // if !check_sudo() {
+    //     use std::process;
+    //     process::exit(0);
+    // }
 
     #[cfg(not(target_os = "android"))]
     utils::setup_panic_handler();
@@ -376,10 +379,10 @@ pub fn run() {
             is_autostart,
             easytier_version
         ])
-        .on_window_event(|_win, event| match event {
+        .on_window_event(|win, event| match event {
             #[cfg(not(target_os = "android"))]
             tauri::WindowEvent::CloseRequested { api, .. } => {
-                let _ = _win.hide();
+                let _ = win.emit(CLOSE_REQUESTED_EVENT, ());
                 api.prevent_close();
             }
             _ => {}

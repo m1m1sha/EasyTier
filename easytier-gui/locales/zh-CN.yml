@@ -1,0 +1,20 @@
+component:
+  about:
+    description: 一个简单、安全、去中心化的内网穿透 VPN 组网方案
+  dialogList:
+    addInstance:
+      title: 添加实例
+      submit: 添加
+      defaultTemplate: 默认模板
+      customTemplate: 自定义模板
+      tips:
+        from: 基于{source}添加实例。
+    appCloseConfirm:
+      title: 确认要退出吗？
+      content: 退出将关闭所有实例。 如需要最小化请点击最小化按钮！
+      confirm: 确认
+      cancel: 取消
+
+page:
+  index:
+    search: 搜索
