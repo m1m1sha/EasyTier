@@ -6,7 +6,7 @@
   html,
   body,
   #app {
-    @apply h-full overflow-auto;
+    @apply h-full overflow-hidden;
   }
 
   ::-webkit-scrollbar {

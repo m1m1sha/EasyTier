@@ -14,7 +14,7 @@ function back() {
 </script>
 
 <template>
-  <div class="p-2 h-full overflow-hidden">
+  <div class="p-2 h-full w-full overflow-hidden">
     <template v-if="selectedId || isMobile">
       <div class="flex flex-row items-center justify-between">
         <div class="flex items-center">

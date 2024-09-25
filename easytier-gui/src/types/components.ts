@@ -19,10 +19,18 @@ export interface InstanceData {
   ipv4?: string
   version?: string
   hostname?: string
-  NatType?: string
+  natType?: string
+  config: InstanceConfig
   events: string[]
   status: boolean
   stats: InstanceTimePeer[]
+}
+
+export interface InstanceConfig {
+  str: string
+  obj: {
+    [key: string]: any
+  }
 }
 
 export interface InstancePeer {

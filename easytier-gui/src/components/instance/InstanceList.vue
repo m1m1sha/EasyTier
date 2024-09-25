@@ -10,7 +10,6 @@ const instanceStore = useInstanceStore()
 const { selectedId, instances } = storeToRefs(instanceStore)
 
 const appStore = useAppStore()
-// const { addInstanceDialogVisible } = storeToRefs(appStore)
 
 const filterInstances = computed(() => instances?.value.filter(instance => instance.name.toLowerCase().includes(props.filter.toLowerCase()) || instance.ipv4?.toLowerCase().includes(props.filter.toLowerCase())) || [])
 

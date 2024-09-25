@@ -2,37 +2,40 @@ import { z } from 'zod'
 import type { Config } from '~/components/ui/auto-form/interface'
 import type { ZodObjectOrWrapped } from '~/components/ui/auto-form/utils'
 
-const { t } = useI18n()
-
 export const createConfigWithNameSchema = computed<ZodObjectOrWrapped>(() => z.object({
   instance_name: z.string().describe('Instance username'),
 }))
 
-export const createConfigWithNameConfig = computed<Config<z.infer<any>>>(() => (
-  {
+export const createConfigWithNameConfig = computed<Config<z.infer<any>>>(() => {
+  const { t } = useI18n()
+
+  return {
     instance_name: {
       label: t('form.instance.instance_name'),
     },
   }
-))
+})
 
-export const configBaseSchema = computed<ZodObjectOrWrapped>(() => z.object({
-  network_name: z.string().describe('Your username'),
-  network_secret: z.string().optional(),
-  hostname: z.string().describe('The hostname to use').optional(),
-  ipv4: z.string().describe('The IPv4 address to use').ip('v4').optional(),
-  dhcp: z.boolean().describe('Whether to enable DHCP').default(false).optional(),
-  instance_name: z.string().describe('The name of the instance').optional(),
-  listeners: z.array(z.string()).describe('The listeners to use').optional(),
-  rpc_portal: z.string().describe('The RPC portal to use').default('127.0.0.1:15888').optional(),
-  uri: z.array(z.string()).describe('The URI of the peer').optional(),
-  cidr: z.array(z.string()).describe('The CIDR of the proxy network').optional(),
-  exit_node: z.array(z.string()).describe('The exit node to use').optional(),
-  instance_id: z.string().describe('The ID of the instance').uuid().optional(),
-}))
+export const configBaseSchema = computed<ZodObjectOrWrapped>(() => {
+  return z.object({
+    network_name: z.string().describe('Your username'),
+    network_secret: z.string().optional(),
+    hostname: z.string().describe('The hostname to use').optional(),
+    ipv4: z.string().describe('The IPv4 address to use').ip('v4').optional(),
+    dhcp: z.boolean().describe('Whether to enable DHCP').default(false).optional(),
+    instance_name: z.string().describe('The name of the instance').optional(),
+    listeners: z.array(z.string()).describe('The listeners to use').optional(),
+    rpc_portal: z.string().describe('The RPC portal to use').default('127.0.0.1:15888').optional(),
+    uri: z.array(z.string()).describe('The URI of the peer').optional(),
+    cidr: z.array(z.string()).describe('The CIDR of the proxy network').optional(),
+    exit_node: z.array(z.string()).describe('The exit node to use').optional(),
+    instance_id: z.string().describe('The ID of the instance').uuid().optional(),
+  })
+})
 
-export const configBaseConfig = computed<Config<z.infer<any>>>(() => (
-  {
+export const configBaseConfig = computed<Config<z.infer<any>>>(() => {
+  const { t } = useI18n()
+  return {
     instance_name: {
       label: t('form.instance.instance_name'),
     },
@@ -64,7 +67,7 @@ export const configBaseConfig = computed<Config<z.infer<any>>>(() => (
       label: t('form.instance.network_secret'),
     },
   }
-))
+})
 
 export const configCommonSchema = computed<ZodObjectOrWrapped>(() => z.object({
   flags: z.object({

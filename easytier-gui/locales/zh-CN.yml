@@ -55,3 +55,4 @@ form:
     rpc_portal: RPC端口
     network_name: 组网名称
     network_secret: 组网密钥
+    submit: 保存

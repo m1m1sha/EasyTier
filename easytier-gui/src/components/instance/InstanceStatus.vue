@@ -7,7 +7,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
 </script>
 
 <template>
-  <Tabs default-value="overview" style="height: calc(100% - 96px);">
+  <Tabs default-value="overview" style="height: calc(100% - 46px);">
     <TabsList>
       <TabsTrigger value="overview">
         {{ t('component.instance.status.overview.title') }}
@@ -49,22 +49,20 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
-              {{ currentInstance?.NatType ?? 'N/A' }}
+              {{ currentInstance?.natType ?? 'N/A' }}
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ t('component.instance.status.overview.device', { time: t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
+              {{ t('component.instance.status.overview.device', { time:
+                t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
             </CardTitle>
             <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <NumberAnimation
-              class="text-2xl font-bold"
-              :to="currentInstance?.stats.at(-1)?.peers.length"
-            />
+            <NumberAnimation class="text-2xl font-bold" :to="currentInstance?.stats.at(-1)?.peers.length" />
             <LineChart
               v-if="currentInstance && currentInstance.stats.length > 0" class="h-[100px] mt-2 pt-2"
               :data="chartStatsData" index="time" :categories="['total']" :show-tooltip="false" :show-grid-line="false"
@@ -75,20 +73,18 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ t('component.instance.status.overview.bandwidth', { time: t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
+              {{ t('component.instance.status.overview.bandwidth', { time:
+                t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
             </CardTitle>
             <ArrowUpDown class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div class="flex flex-wrap text-2xl font-bold space-x-2 items-center">
-              <NumberAnimation
-                :to="statusUpTotal.size"
-                :suffix="statusUpTotal.unit" :precision="1"
-              />
+              <NumberAnimation :to="statusUpTotal.size" :suffix="statusUpTotal.unit" :precision="1" />
               <Separator orientation="vertical" label="/" />
               <NumberAnimation
-                class="text-[--vis-secondary-color-0x]"
-                :to="statusDownTotal.size" :precision="1" :suffix="statusDownTotal.unit"
+                class="text-[--vis-secondary-color-0x]" :to="statusDownTotal.size" :precision="1"
+                :suffix="statusDownTotal.unit"
               />
             </div>
             <LineChart
@@ -104,19 +100,17 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
     </TabsContent>
     <TabsContent value="detail" class="h-full overflow-y-scroll">
       <div
-        v-if="currentInstance && currentInstance.stats.length > 0"
+        v-if="currentInstance && currentInstance.stats.length > 0" name="list" appear
         class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pr-px"
       >
         <PeerDetail v-for="peer in currentPeers" :id="peer.id" :key="peer.id" />
       </div>
-      <div v-else class="w-full h-full flex text-center justify-center align-middle">
-        {{ t('component.instance.status.detail.noData') }}
+      <div v-else class="w-full h-full flex text-center justify-center items-center align-middle">
+        <span>{{ t('component.instance.status.detail.noData') }}</span>
       </div>
     </TabsContent>
-    <TabsContent value="config" class="h-full overflow-y-scroll">
-      <div class="pr-px">
-        <InstanceConfig />
-      </div>
+    <TabsContent value="config" class="h-full overflow-y-scroll pr-px">
+      <InstanceConfig />
     </TabsContent>
   </Tabs>
 </template>

@@ -26,9 +26,14 @@ declare global {
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
+  const configBaseConfig: typeof import('./composables/config')['configBaseConfig']
+  const configBaseSchema: typeof import('./composables/config')['configBaseSchema']
+  const configCommonSchema: typeof import('./composables/config')['configCommonSchema']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const createApp: typeof import('vue')['createApp']
+  const createConfigWithNameConfig: typeof import('./composables/config')['createConfigWithNameConfig']
+  const createConfigWithNameSchema: typeof import('./composables/config')['createConfigWithNameSchema']
   const createEventHook: typeof import('@vueuse/core')['createEventHook']
   const createGlobalState: typeof import('@vueuse/core')['createGlobalState']
   const createInjectionState: typeof import('@vueuse/core')['createInjectionState']
@@ -47,6 +52,8 @@ declare global {
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
+  const generateInstanceDefault: typeof import('./composables/mock')['generateInstanceDefault']
+  const generateInstanceStrDefault: typeof import('./composables/mock')['generateInstanceStrDefault']
   const generateInstanceWithConfig: typeof import('./composables/mock')['generateInstanceWithConfig']
   const generateInstanceWithDefaultConfig: typeof import('./composables/mock')['generateInstanceWithDefaultConfig']
   const generateRandomString: typeof import('./composables/utils')['generateRandomString']
@@ -349,11 +356,7 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
-    readonly DEFAULT_CONFIG_SCHEMA: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG_SCHEMA']>
-    readonly DEFAULT_CREATE_CONFIG_SCHEMA: UnwrapRef<typeof import('./composables/config')['DEFAULT_CREATE_CONFIG_SCHEMA']>
-    readonly DEFAULT_CREATE_FIELD_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CREATE_FIELD_CONFIG']>
     readonly DEFAULT_DEPENDENCIES: UnwrapRef<typeof import('./composables/config')['DEFAULT_DEPENDENCIES']>
-    readonly DEFAULT_FIELD_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_FIELD_CONFIG']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly InstanceStatus: UnwrapRef<typeof import('./types/components')['InstanceStatus']>
     readonly NatType: UnwrapRef<typeof import('./types/components')['NatType']>
@@ -367,9 +370,14 @@ declare module 'vue' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
+    readonly configBaseConfig: UnwrapRef<typeof import('./composables/config')['configBaseConfig']>
+    readonly configBaseSchema: UnwrapRef<typeof import('./composables/config')['configBaseSchema']>
+    readonly configCommonSchema: UnwrapRef<typeof import('./composables/config')['configCommonSchema']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createConfigWithNameConfig: UnwrapRef<typeof import('./composables/config')['createConfigWithNameConfig']>
+    readonly createConfigWithNameSchema: UnwrapRef<typeof import('./composables/config')['createConfigWithNameSchema']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
@@ -388,6 +396,7 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly generateInstanceStrDefault: UnwrapRef<typeof import('./composables/mock')['generateInstanceStrDefault']>
     readonly generateInstanceWithConfig: UnwrapRef<typeof import('./composables/mock')['generateInstanceWithConfig']>
     readonly generateInstanceWithDefaultConfig: UnwrapRef<typeof import('./composables/mock')['generateInstanceWithDefaultConfig']>
     readonly generateRandomString: UnwrapRef<typeof import('./composables/utils')['generateRandomString']>
