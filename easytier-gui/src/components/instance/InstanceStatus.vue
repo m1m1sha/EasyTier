@@ -56,8 +56,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ t('component.instance.status.overview.device', { time:
-                t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
+              {{ t('component.instance.status.overview.device', { time: t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
             </CardTitle>
             <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -89,9 +88,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
             </div>
             <LineChart
               v-if="currentInstance && currentInstance.stats.length > 0" class="mt-2 pt-2 h-[100px]"
-              :data="chartStatsData" index="time" :categories="['up', 'down']" :y-formatter="(tick, _i) => {
-                return typeof tick === 'number' ? `${humanStreamSize(tick)}` : ''
-              }" :show-tooltip="false" :show-grid-line="false" :show-legend="false" :show-x-axis="false"
+              :data="chartStatsData" index="time" :categories="['up', 'down']" :y-formatter="(tick, _i) => typeof tick === 'number' ? `${humanStreamSize(tick)}` : ''" :show-tooltip="false" :show-grid-line="false" :show-legend="false" :show-x-axis="false"
               :show-y-axis="false"
             />
           </CardContent>
@@ -109,7 +106,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <span>{{ t('component.instance.status.detail.noData') }}</span>
       </div>
     </TabsContent>
-    <TabsContent value="config" class="h-full overflow-y-scroll pr-px">
+    <TabsContent value="config" style="height: calc(100% - 44px);" class="overflow-hidden pr-px">
       <InstanceConfig />
     </TabsContent>
   </Tabs>

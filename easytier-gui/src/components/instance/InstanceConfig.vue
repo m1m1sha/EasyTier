@@ -118,7 +118,7 @@ const onSubmit = form.handleSubmit((_values) => {
         {{ t('form.instance.submit') }}
       </Button>
     </form>
-    <CodeEdit :code="currentInstance?.config.str ?? ''" :style="{ width: `${width}px`, height: `${height - 48}px` }" />
+    <CodeEdit :code="currentInstance?.config.str ?? ''" :style="{ width: `${width}px`, height: `${height}px` }" />
   </div>
 </template>
 

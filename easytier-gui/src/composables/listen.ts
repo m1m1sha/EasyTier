@@ -18,15 +18,19 @@ async function listenDragDrop() {
   const fileUnlisten = await appWindow.onDragDropEvent((event) => {
     switch (event.event) {
       case 'tauri://drag-enter':
-        appStore.hideAllDialog()
-        appStore.setAddInstanceFromFileDrawerVisible(true)
+        if (event.payload.type === 'enter' && event.payload.paths.length > 0) {
+          appStore.hideAllDialog()
+          appStore.setAddInstanceFromFileDrawerVisible(true)
+        }
         break
       case 'tauri://drag-leave':
         appStore.setAddInstanceFromFileDrawerVisible(false)
         break
       case 'tauri://drag-drop':
-        appStore.setAddInstanceFromFileDrawerVisible(false)
-        appStore.setAddInstanceDialogVisible(true)
+        if (event.payload.type === 'drop' && event.payload.paths.length > 0) {
+          appStore.setAddInstanceFromFileDrawerVisible(false)
+          appStore.setAddInstanceDialogVisible(true)
+        }
         break
       default:
         break
