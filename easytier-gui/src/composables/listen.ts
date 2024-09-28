@@ -1,8 +1,11 @@
+import type { InstanceInstantData } from '~/types/components'
+
 const unlistenArr: any[] = []
 export async function listen() {
   if (isTauri) {
     unlistenArr.push(await listenDragDrop())
     unlistenArr.push(await listenCloseRequest())
+    unlistenArr.push(await listenInstanceInfo())
   }
 }
 
@@ -45,6 +48,36 @@ async function listenCloseRequest() {
   const appStore = useAppStore()
   const unlisten = await appWindow.listen<null>('easytier-gui://close', () => {
     appStore.setAppCloseConfirmDialogVisible(true)
+  })
+  return unlisten
+}
+
+async function listenInstanceInfo() {
+  const { getCurrentWindow } = await import('@tauri-apps/api/window')
+  const appWindow = getCurrentWindow()
+  const instanceStore = useInstanceStore()
+  const { instances } = storeToRefs(instanceStore)
+  instances.value.forEach(i => i.status = false)
+  const unlisten = await appWindow.listen<InstanceInstantData[]>('easytier-gui://instance/info', (resp) => {
+    // console.log(resp.payload)
+    const runningIds = resp.payload.map((data) => {
+      return data.id
+    })
+
+    instances.value.forEach((instance) => {
+      instance.status = runningIds.includes(instance.id)
+      const instantData = resp.payload.find(data => data.id === instance.id)
+      if (instance.status && instantData) {
+        instance.ipv4 = instantData.ipv4
+        instance.version = instantData.version
+        instance.hostname = instantData.hostname
+        instance.natType = instantData.natType
+        instance.events = instantData.events || []
+        if (instance.stats.length >= 59)
+          instance.stats.shift()
+        instance.stats.push(instantData.stat)
+      }
+    })
   })
   return unlisten
 }

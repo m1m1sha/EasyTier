@@ -4,35 +4,29 @@ import type { CmComponentRef } from 'codemirror-editor-vue3'
 // import { yaml } from '@codemirror/lang-yaml'
 // import { oneDark } from '@codemirror/theme-one-dark'
 import CodeMirror from 'codemirror-editor-vue3'
-import { parse, stringify } from 'smol-toml'
 // import CodeMirror from 'vue-codemirror6'
 import 'codemirror/mode/toml/toml.js'
 import 'codemirror/theme/ayu-dark.css'
 import '~/styles/codeMirror.css'
 
 const props = defineProps<{
-  code: string
+  modelValue: string
 }>()
 
-// const emits = defineEmits<{
-//   update: [code: string]
-// }>()
+const emits = defineEmits<{
+  'update:modelValue': [code: string]
+}>()
 
-// const t = ref<NodeJS.Timeout | null>()
+const t = ref<NodeJS.Timeout | null>()
 
-// const code = computed({
-//   get() {
-//     return props.code
-//   },
-//   async set(value) {
-//     if (t.value !== null) {
-//       clearTimeout(t.value)
-//     }
-//     t.value = setTimeout(() => {
-//       emits('update', value)
-//     }, 500)
-//   },
-// })
+function onChange(value: string) {
+  if (t.value !== null) {
+    clearTimeout(t.value)
+  }
+  t.value = setTimeout(() => {
+    emits('update:modelValue', value)
+  }, 100)
+}
 
 const cmRef = ref<CmComponentRef>()
 const cmOptions: EditorConfiguration = {
@@ -52,7 +46,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <CodeMirror ref="cmRef" :value="props.code" :options="cmOptions" class="border rounded-md flex-1" />
+  <CodeMirror ref="cmRef" :value="props.modelValue" :options="cmOptions" class="border rounded-md flex-1" @change="onChange" />
   <!-- <CodeMirror
     v-model="code"
     basic

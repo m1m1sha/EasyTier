@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import { ChevronLeft, FileClock, MoreVertical, Share2, Trash2 } from 'lucide-vue-next'
+import { parse, stringify } from 'smol-toml'
+import { startNetworkInstance, stopNetworkInstance } from '~/composables/instance'
 
 const { t } = useI18n()
 const instanceStore = useInstanceStore()
-const { selectedId, currentInstance } = storeToRefs(instanceStore)
+const { selectedId, currentInstance, instances } = storeToRefs(instanceStore)
 
 const instanceStatus = computed(() => currentInstance.value?.status)
 
+async function toggleStatus(id: string) {
+  // console.log(instanceStatus.value ? 'top' : 'start', currentInstance.value!.config.str)
+  const curInstance = instances.value.find(i => i.id === id)
+  if (curInstance?.status) {
+    await stopNetworkInstance(id)
+  }
+  else {
+    const toml = parse(curInstance!.config.str)
+    toml.instance_id = id
+    await startNetworkInstance(stringify(toml))
+  }
+}
 function back() {
   if (isMobile.value)
     instanceStore.setSelectedId('')
@@ -29,7 +43,7 @@ function back() {
           </Tooltip>
         </div>
         <div class="flex items-center">
-          <Switch :checked="instanceStatus" />
+          <Switch :checked="instanceStatus" @update:checked="toggleStatus(selectedId)" />
           <Separator orientation="vertical" class="mx-2 h-6" />
           <DropdownMenu>
             <DropdownMenuTrigger as-child>

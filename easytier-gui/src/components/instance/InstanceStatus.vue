@@ -30,7 +30,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
           </CardHeader>
           <CardContent>
             <div v-if="statusIpv4.split('.').length < 3" class="text-2xl font-bold">
-              {{ statusIpv4 }}
+              {{ statusIpv4 === '' ? 'N/A' : statusIpv4 }}
             </div>
             <div v-else class="text-2xl font-bold">
               <NumberAnimation
@@ -97,7 +97,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
     </TabsContent>
     <TabsContent value="detail" class="h-full overflow-y-scroll">
       <div
-        v-if="currentInstance && currentInstance.stats.length > 0" name="list" appear
+        v-if="currentInstance" name="list" appear
         class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pr-px"
       >
         <PeerDetail v-for="peer in currentPeers" :id="peer.id" :key="peer.id" />

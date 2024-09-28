@@ -62,7 +62,7 @@ const currentStatsData = computed(() => {
       <span class="text-xs text-gray-500 ml-2">{{ `${detailStatsData.version ? 'v' : ''}${detailStatsData.version
         || 'unknown'}` }}</span>
     </div>
-    <div v-if="currentStatsData.ipv4 && currentInstance?.status">
+    <div v-if="currentInstance?.status">
       <Badge class="!bg-primary/85 mr-2 mt-2">
         {{ `IP: ${currentStatsData.ipv4 || '-'}` }}
       </Badge>

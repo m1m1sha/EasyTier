@@ -108,6 +108,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
+  const parseNetworkStrConfig: typeof import('./composables/instance')['parseNetworkStrConfig']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const pkg: typeof import('./composables/utils')['pkg']
   const platformIsMobile: typeof import('./composables/mobile')['platformIsMobile']
@@ -134,6 +135,8 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const startNetworkInstance: typeof import('./composables/instance')['startNetworkInstance']
+  const stopNetworkInstance: typeof import('./composables/instance')['stopNetworkInstance']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
@@ -448,6 +451,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
+    readonly parseNetworkStrConfig: UnwrapRef<typeof import('./composables/instance')['parseNetworkStrConfig']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly pkg: UnwrapRef<typeof import('./composables/utils')['pkg']>
     readonly platformIsMobile: UnwrapRef<typeof import('./composables/mobile')['platformIsMobile']>
@@ -474,6 +478,8 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly startNetworkInstance: UnwrapRef<typeof import('./composables/instance')['startNetworkInstance']>
+    readonly stopNetworkInstance: UnwrapRef<typeof import('./composables/instance')['stopNetworkInstance']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>

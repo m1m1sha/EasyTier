@@ -35,7 +35,7 @@ export function instancesMock(length = 3) {
       ipv4: status ? ipv4 : undefined,
       version: status ? `2.0.0` : undefined,
       hostname: status ? `host-${i}` : undefined,
-      config: { str: generateInstanceStrDefault(id), obj: {} },
+      config: { str: generateInstanceStrDefault(), obj: {} },
       natType: [NatType.fullCone, NatType.portRestrictedCone, NatType.restrictedCone, NatType.symmetric, NatType.unknown].splice(Math.floor(rand(0, 3)))[0].toUpperCase(),
       events: [],
       status,
@@ -49,7 +49,7 @@ export function generateInstanceWithDefaultConfig(name?: string) {
   return {
     id,
     name: name ?? `Instance ${generateRandomString(6)}`,
-    config: { str: generateInstanceStrDefault(id), obj: {} },
+    config: { str: generateInstanceStrDefault(), obj: {} },
     events: [],
     status: false,
     stats: [],
@@ -67,69 +67,22 @@ export function generateInstanceWithConfig(config: any) {
   } as InstanceData
 }
 
-export function generateInstanceStrDefault(id: string) {
+export function generateInstanceStrDefault(name: string = 'instance-default') {
   return `
-# 实例名称，用于在同一台机器上标识此 VPN 节点
-  instance_name = ""
-# 主机名，用于标识此设备的主机名
-  hostname = ""
-# 实例 ID，一般为 UUID，在同一个 VPN 网络中唯一
-  instance_id = "${id}"
-# 此 VPN 节点的 IPv4 地址，如果为空，则此节点将仅转发数据包，不会创建 TUN 设备
-  ipv4 = ""
-# 由 Easytier 自动确定并设置IP地址，默认从10.0.0.1开始。警告：在使用 DHCP 时，如果网络中出现 IP 冲突，IP 将自动更改
-  dhcp = true
-
-# 监听器列表，用于接受连接
-  listeners = [
+instance_name = "${name}"
+dhcp = true
+listeners = [
     "tcp://0.0.0.0:11010",
     "udp://0.0.0.0:11010",
     "wg://0.0.0.0:11011",
-    "ws://0.0.0.0:11011",
-    "wss://0.0.0.0:11012",
-  ]
+]
+rpc_portal = "127.0.0.1:0"
 
-# 退出节点列表
-  exit_nodes = [
-  ]
+[network_identity]
+network_name = "easytier-default"
+network_secret = ""
 
-# 用于管理的 RPC 门户地址
-  rpc_portal = "127.0.0.1:0"
-
-  [network_identity]
-# 网络名称，用于标识 VPN 网络
-  network_name = ""
-# 网络密钥，用于验证此节点属于 VPN 网络
-  network_secret = ""
-
-# 这里是对等连接节点配置，可以多段配置
-  [[peer]]
-  uri = ""
-
-# 这里是子网代理节点配置，可以有多段配置
-  [[proxy_network]]
-  cidr = ""
-
-  [flags]
-# 连接到对等节点使用的默认协议
-  default_protocol = "tcp"
-# TUN 设备名称，如果为空，则使用默认名称
-  dev_name = ""
-# 是否启用加密
-  enable_encryption = true
-# 是否启用 IPv6 支持
-  enable_ipv6 = true
-# TUN 设备的 MTU
-  mtu = 1380
-# 延迟优先模式，将尝试使用最低延迟路径转发流量，默认使用最短路径
-  latency_first = false
-# 将本节点配置为退出节点
-  enable_exit_node = false
-# 禁用 TUN 设备
-  no_tun = false
-# 为子网代理启用 smoltcp 堆栈
-  use_smoltcp = false
-# 仅转发白名单网络的流量，支持通配符字符串。多个网络名称间可以使用英文空格间隔。如果该参数为空，则禁用转发。默认允许所有网络。例如：'*'（所有网络），'def*'（以def为前缀的网络），'net1 net2'（只允许net1和net2）
-  foreign_network_whitelist = "*"
+[[peer]]
+uri = "tcp://easytier.public.kkrainbow.top:11010"
   `
 }

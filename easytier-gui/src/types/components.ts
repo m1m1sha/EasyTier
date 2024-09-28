@@ -26,6 +26,19 @@ export interface InstanceData {
   stats: InstanceTimePeer[]
 }
 
+export interface InstanceInstantData {
+  id: string
+  name: string
+  ipv4: string
+  version: string
+  hostname: string
+  natType: string
+  events: string[]
+  prps: any[]
+  status: boolean
+  stat: InstanceTimePeer
+}
+
 export interface InstanceConfig {
   str: string
   obj: {

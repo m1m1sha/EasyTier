@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { toTypedSchema } from '@vee-validate/zod'
-
+import { parse, stringify } from 'smol-toml'
 import { useForm } from 'vee-validate'
 import z from 'zod'
 import {
@@ -34,6 +34,21 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit((_values) => {
   // console.log('Form submitted!', values)
+})
+
+const configStr = computed({
+  get() {
+    const toml = parse(currentInstance.value!.config.str)
+    toml.instance_id = currentInstance.value!.id
+    toml.instance_name = currentInstance.value!.name
+    return stringify(toml)
+  },
+  set(value) {
+    const toml = parse(value)
+    toml.instance_id = currentInstance.value!.id
+    currentInstance.value!.name = toml.instance_name.toString()
+    currentInstance.value!.config.str = stringify(toml)
+  },
 })
 </script>
 
@@ -118,7 +133,7 @@ const onSubmit = form.handleSubmit((_values) => {
         {{ t('form.instance.submit') }}
       </Button>
     </form>
-    <CodeEdit :code="currentInstance?.config.str ?? ''" :style="{ width: `${width}px`, height: `${height}px` }" />
+    <CodeEdit v-if="currentInstance" v-model="configStr" :style="{ width: `${width}px`, height: `${height}px` }" class="flex-1" />
   </div>
 </template>
 
