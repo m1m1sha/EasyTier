@@ -5,12 +5,24 @@ export enum InstanceStatus {
   error = 'error',
 }
 
+// export enum NatType {
+//   unknown = 'unknown',
+//   symmetric = 'symmetric',
+//   fullCone = 'full cone',
+//   restrictedCone = 'restricted cone',
+//   portRestrictedCone = 'port restricted cone',
+// }
+
 export enum NatType {
-  unknown = 'unknown',
-  symmetric = 'symmetric',
-  fullCone = 'full cone',
-  restrictedCone = 'restricted cone',
-  portRestrictedCone = 'port restricted cone',
+  /// has NAT; but own a single public IP, port is not changed
+  Unknown = 0,
+  OpenInternet = 1,
+  NoPat = 2,
+  FullCone = 3,
+  Restricted = 4,
+  PortRestricted = 5,
+  Symmetric = 6,
+  SymUdpFirewall = 7,
 }
 
 export interface InstanceData {
@@ -19,9 +31,11 @@ export interface InstanceData {
   ipv4?: string
   version?: string
   hostname?: string
-  natType?: string
+  udpNatType?: number
+  tcpNatType?: number
   config: InstanceConfig
   events: string[]
+  prps: PeerRoutePair[]
   status: boolean
   stats: InstanceTimePeer[]
 }
@@ -32,11 +46,68 @@ export interface InstanceInstantData {
   ipv4: string
   version: string
   hostname: string
-  natType: string
+  udpNatType?: number
+  tcpNatType?: number
   events: string[]
-  prps: any[]
+  prps: PeerRoutePair[]
   status: boolean
   stat: InstanceTimePeer
+}
+
+export interface PeerRoutePair {
+  route: Route
+  peer?: PeerInfo
+}
+
+export interface Route {
+  peer_id: number
+  ipv4_addr: string
+  next_hop_peer_id: number
+  cost: number
+  proxy_cidr: string[]
+  hostname: string
+  stun_info?: {
+    udp_nat_type: NatType
+    tcp_nat_type: NatType
+    last_update_time: number
+    public_ip: string[]
+    min_port: number
+    max_port: number
+  }
+  inst_id: string
+  feature_flag: FeatureFlag
+}
+
+export interface FeatureFlag {
+  is_public_server: boolean
+  no_relay_data: boolean
+}
+
+export interface PeerInfo {
+  peer_id: number
+  conns: PeerConnInfo[]
+}
+
+export interface PeerConnInfo {
+  conn_id: string
+  my_peer_id: number
+  peer_id: number
+  features: string[]
+  tunnel?: {
+    tunnel_type: string
+    local_addr?: string
+    remote_addr?: string
+  }
+  stats?: {
+    rx_bytes: number
+    tx_bytes: number
+    rx_packets: number
+    tx_packets: number
+    latency_us: number
+  }
+  loss_rate: number
+  is_client: boolean
+  network_name: string
 }
 
 export interface InstanceConfig {
@@ -52,6 +123,8 @@ export interface InstancePeer {
   ipv4?: string
   ipv6?: string
   version?: string
+  server: boolean
+  relay: boolean
   up: number
   down: number
   cost: number
@@ -68,8 +141,10 @@ export interface InstancePeerDetail {
 
 export interface InstancePeerStat {
   time: number
-  ipv4: string | undefined
-  ipv6: string | undefined
+  ipv4?: string
+  ipv6?: string
+  server: boolean
+  relay: boolean
   up: number
   down: number
   cost: number

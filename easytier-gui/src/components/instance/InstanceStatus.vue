@@ -1,9 +1,27 @@
 <script setup lang="ts">
 import { ArrowUpDown, PlaneTakeoff, Radar, Users } from 'lucide-vue-next'
+import { natTypeNum2Str } from '~/composables/utils'
+// import type { InstancePeer } from '~/types/components'
 
 const { t } = useI18n()
 const instanceStore = useInstanceStore()
 const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTotal, currentPeers } = storeToRefs(instanceStore)
+
+const peerList = computed(() => {
+  // const local: InstancePeer = {
+  //   ipv4: currentInstance.value?.ipv4,
+  //   name: currentInstance.value?.hostname || 'Local',
+  //   id: currentInstance.value?.id ?? '',
+  //   server: false,
+  //   relay: false,
+  //   cost: 0,
+  //   up: 0,
+  //   down: 0,
+  //   lost: 0,
+  //   latency: 0,
+  // }
+  return [...currentPeers.value!.sort((a, b) => a.server && !b.server ? -1 : 1) ?? []]
+})
 </script>
 
 <template>
@@ -49,14 +67,17 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
-              {{ currentInstance?.natType ?? 'N/A' }}
+              {{ currentInstance?.udpNatType ? natTypeNum2Str(currentInstance?.udpNatType) : 'N/A' }}
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ t('component.instance.status.overview.device', { time: t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
+              {{ t('component.instance.status.overview.device', {
+                time:
+                  t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`),
+              }) }}
             </CardTitle>
             <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -72,8 +93,10 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle class="text-sm font-medium">
-              {{ t('component.instance.status.overview.bandwidth', { time:
-                t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`) }) }}
+              {{ t('component.instance.status.overview.bandwidth', {
+                time:
+                  t(`component.instance.status.overview.${currentInstance?.status ? 'realTime' : 'history'}`),
+              }) }}
             </CardTitle>
             <ArrowUpDown class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -88,7 +111,9 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
             </div>
             <LineChart
               v-if="currentInstance && currentInstance.stats.length > 0" class="mt-2 pt-2 h-[100px]"
-              :data="chartStatsData" index="time" :categories="['up', 'down']" :y-formatter="(tick, _i) => typeof tick === 'number' ? `${humanStreamSize(tick)}` : ''" :show-tooltip="false" :show-grid-line="false" :show-legend="false" :show-x-axis="false"
+              :data="chartStatsData" index="time" :categories="['up', 'down']"
+              :y-formatter="(tick, _i) => typeof tick === 'number' ? `${humanStreamSize(tick)}` : ''"
+              :show-tooltip="false" :show-grid-line="false" :show-legend="false" :show-x-axis="false"
               :show-y-axis="false"
             />
           </CardContent>
@@ -100,7 +125,7 @@ const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTo
         v-if="currentInstance" name="list" appear
         class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pr-px"
       >
-        <PeerDetail v-for="peer in currentPeers" :id="peer.id" :key="peer.id" />
+        <PeerDetail v-for="peer in peerList" :id="peer.id" :key="peer.id" />
       </div>
       <div v-else class="w-full h-full flex text-center justify-center items-center align-middle">
         <span>{{ t('component.instance.status.detail.noData') }}</span>

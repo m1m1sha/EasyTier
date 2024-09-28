@@ -2,6 +2,7 @@
 import type { InstancePeerDetail, InstancePeerStat } from '~/types/components'
 
 const props = defineProps<PeerDetailProps>()
+const { t } = useI18n()
 const instanceStore = useInstanceStore()
 const { currentInstance, chartStatsData, statusUpTotal, statusDownTotal } = storeToRefs(instanceStore)
 interface PeerDetailProps {
@@ -29,6 +30,8 @@ const detailStatsData = computed(() => {
           time: item.time,
           ipv4: peer?.ipv4,
           ipv6: peer?.ipv6,
+          server: peer.server,
+          relay: peer.relay,
           up: peer?.up || 0,
           down: peer?.down || 0,
           cost: peer?.cost || 0,
@@ -42,6 +45,10 @@ const detailStatsData = computed(() => {
 
 const currentStatsData = computed(() => {
   return detailStatsData.value.stats.at(-1)!
+})
+
+const deviceConnStatus = computed(() => {
+  return currentStatsData.value.server ? t('component.instance.peerDetail.server') : currentStatsData.value.cost > 0 ? currentStatsData.value.cost === 1 ? 'p2p' : `relay(${currentStatsData.value.cost})` : t('component.instance.peerDetail.local')
 })
 </script>
 
@@ -60,21 +67,24 @@ const currentStatsData = computed(() => {
         </Tooltip>
       </TooltipProvider>
       <span class="text-xs text-gray-500 ml-2">{{ `${detailStatsData.version ? 'v' : ''}${detailStatsData.version
-        || 'unknown'}` }}</span>
+        ?? 'unknown'}` }}</span>
     </div>
     <div v-if="currentInstance?.status">
-      <Badge class="!bg-primary/85 mr-2 mt-2">
+      <Badge v-if="!currentStatsData.server" class="!bg-primary/85 mr-2 mt-2">
         {{ `IP: ${currentStatsData.ipv4 || '-'}` }}
       </Badge>
       <Badge variant="secondary" class="mr-2 mt-2">
-        {{ currentStatsData.cost > 0 ? currentStatsData.cost === 1 ? 'p2p' : `relay(${currentStatsData.cost})` : '本机' }}
+        {{ deviceConnStatus }}
+      </Badge>
+      <Badge v-if="currentStatsData.relay" variant="secondary" class="mr-2 mt-2">
+        {{ t('component.instance.peerDetail.relay') }}
       </Badge>
     </div>
     <div v-if="currentStatsData.cost > 0" class="flex flex-wrap">
       <HoverCard>
         <HoverCardTrigger as-child>
           <Badge variant="outline" class="mr-2 mt-2 space-x-2">
-            <NumberAnimation :to="currentStatsData.latency" suffix="ms" />
+            <NumberAnimation :to="currentStatsData.latency" :precision="0" suffix="ms" />
             <Separator orientation="vertical" />
             <NumberAnimation class="text-[--vis-accent-color-0x]" :to="currentStatsData.lost" suffix="%" />
           </Badge>
@@ -82,17 +92,17 @@ const currentStatsData = computed(() => {
         <HoverCardContent class="!p-0">
           <CardHeader class="border-b p-3">
             <CardTitle>
-              <span>延迟</span>
+              <span>{{ t('component.instance.peerDetail.latency') }}</span>
               <span class="mx-1">/</span>
-              <span class="text-[--vis-accent-color-0x]">丢包</span>
+              <span class="text-[--vis-accent-color-0x]">{{ t('component.instance.peerDetail.lost') }}</span>
             </CardTitle>
           </CardHeader>
           <CardContent class="min-w-[180px] flex flex-col px-2 pb-2">
             <AreaChart
               class="w-full h-28 mt-4" :data="detailStatsData.stats" index="time"
               :categories="['latency', 'lost']" :colors="['#ffffff', '#f27474']"
-              :y-formatter="(tick, _i) => tick.toString()" :show-tooltip="false"
-              :show-grid-line="true" :show-legend="false" :show-x-axis="false"
+              :y-formatter="(tick, _i) => tick.toString()" :show-tooltip="false" :show-grid-line="true"
+              :show-legend="false" :show-x-axis="false"
             />
           </CardContent>
         </HoverCardContent>
@@ -115,9 +125,9 @@ const currentStatsData = computed(() => {
         <HoverCardContent class="!p-0">
           <CardHeader class="border-b p-3">
             <CardTitle>
-              <span>上传</span>
+              <span>{{ t('component.instance.peerDetail.up') }}</span>
               <span class="mx-1">/</span>
-              <span class="text-[--vis-secondary-color-0x]">下载</span>
+              <span class="text-[--vis-secondary-color-0x]">{{ t('component.instance.peerDetail.down') }}</span>
             </CardTitle>
           </CardHeader>
           <CardContent class="min-w-[180px] flex flex-col px-2 pb-2">
@@ -143,7 +153,7 @@ const currentStatsData = computed(() => {
         <HoverCardContent class="!p-0">
           <CardHeader class="border-b p-3">
             <CardTitle>
-              <p>设备数</p>
+              <p>{{ t('component.instance.peerDetail.deviceNum') }}</p>
             </CardTitle>
           </CardHeader>
           <CardContent class="min-w-[180px] flex flex-col px-2 pb-2">
@@ -168,9 +178,9 @@ const currentStatsData = computed(() => {
         <HoverCardContent class="!p-0">
           <CardHeader class="border-b p-3">
             <CardTitle>
-              <span>上传</span>
+              <span>{{ t('component.instance.peerDetail.up') }}</span>
               <span class="mx-1">/</span>
-              <span class="text-[--vis-secondary-color-0x]">下载</span>
+              <span class="text-[--vis-secondary-color-0x]">{{ t('component.instance.peerDetail.down') }}</span>
             </CardTitle>
           </CardHeader>
           <CardContent class="min-w-[180px] flex flex-col px-2 pb-2">
@@ -187,6 +197,4 @@ const currentStatsData = computed(() => {
   </div>
 </template>
 
-<style lang="postcss" scoped>
-
-</style>
+<style lang="postcss" scoped></style>

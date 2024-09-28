@@ -38,6 +38,15 @@ component:
         title: 详情
         noData: 暂无数据
       config: 配置
+    peerDetail:
+      latency: 延迟
+      lost: 丢包
+      up: 上传
+      down: 下载
+      deviceNum: 设备数
+      server: 服务器
+      local: 本机
+      relay: 可中转
 
 page:
   index:

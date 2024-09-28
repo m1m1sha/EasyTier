@@ -1,4 +1,5 @@
 import _pkg from '~/../package.json'
+import { NatType } from '~/types/components'
 
 export const isDev = import.meta.env.DEV
 
@@ -52,4 +53,46 @@ export function generateRandomString(length: number): string {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
   }
   return result
+}
+
+export function natTypeStr2Num(type: string): number {
+  switch (type) {
+    case 'OpenInternet':
+      return NatType.OpenInternet
+    case 'NoPAT':
+      return NatType.NoPat
+    case 'FullCone':
+      return NatType.FullCone
+    case 'Restricted':
+      return NatType.Restricted
+    case 'PortRestricted':
+      return NatType.PortRestricted
+    case 'Symmetric':
+      return NatType.Symmetric
+    case 'SymUdpFirewall':
+      return NatType.SymUdpFirewall
+    default:
+      return NatType.Unknown
+  }
+}
+
+export function natTypeNum2Str(type: number | NatType): string {
+  switch (type) {
+    case NatType.OpenInternet:
+      return 'OpenInternet'
+    case NatType.NoPat:
+      return 'NoPAT'
+    case NatType.FullCone:
+      return 'FullCone'
+    case NatType.Restricted:
+      return 'Restricted'
+    case NatType.PortRestricted:
+      return 'PortRestricted'
+    case NatType.Symmetric:
+      return 'Symmetric'
+    case NatType.SymUdpFirewall:
+      return 'SymUdpFirewall'
+    default:
+      return 'Unknown'
+  }
 }

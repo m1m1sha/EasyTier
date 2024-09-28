@@ -87,6 +87,8 @@ declare global {
   const mapStores: typeof import('pinia')['mapStores']
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
+  const natTypeNum2Str: typeof import('./composables/utils')['natTypeNum2Str']
+  const natTypeStr2Num: typeof import('./composables/utils')['natTypeStr2Num']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -400,8 +402,6 @@ declare module 'vue' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly generateInstanceStrDefault: UnwrapRef<typeof import('./composables/mock')['generateInstanceStrDefault']>
-    readonly generateInstanceWithConfig: UnwrapRef<typeof import('./composables/mock')['generateInstanceWithConfig']>
-    readonly generateInstanceWithDefaultConfig: UnwrapRef<typeof import('./composables/mock')['generateInstanceWithDefaultConfig']>
     readonly generateRandomString: UnwrapRef<typeof import('./composables/utils')['generateRandomString']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
@@ -430,6 +430,8 @@ declare module 'vue' {
     readonly mapStores: UnwrapRef<typeof import('pinia')['mapStores']>
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly natTypeNum2Str: UnwrapRef<typeof import('./composables/utils')['natTypeNum2Str']>
+    readonly natTypeStr2Num: UnwrapRef<typeof import('./composables/utils')['natTypeStr2Num']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>

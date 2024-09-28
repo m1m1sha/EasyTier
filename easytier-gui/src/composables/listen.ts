@@ -71,8 +71,10 @@ async function listenInstanceInfo() {
         instance.ipv4 = instantData.ipv4
         instance.version = instantData.version
         instance.hostname = instantData.hostname
-        instance.natType = instantData.natType
+        instance.udpNatType = instantData.udpNatType
+        instance.tcpNatType = instantData.tcpNatType
         instance.events = instantData.events || []
+        instance.prps = instantData.prps
         if (instance.stats.length >= 59)
           instance.stats.shift()
         instance.stats.push(instantData.stat)

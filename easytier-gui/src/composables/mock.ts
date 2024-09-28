@@ -1,5 +1,5 @@
 import { rand } from '@vueuse/core'
-import type { InstanceData, InstanceTimePeer } from '~/types/components'
+import type { InstanceData, InstancePeer, InstanceTimePeer } from '~/types/components'
 
 export function instancesMock(length = 3) {
   return Array.from(Array.from({ length }).keys()).map((i) => {
@@ -12,19 +12,21 @@ export function instancesMock(length = 3) {
       return {
         time: new Date().getTime() - (i * 1000 * 100),
         peers: Array.from(Array.from({ length: deviceTotal }).keys()).map((ii) => {
-          return {
+          const peer: InstancePeer = {
             id: `${ii + 1}` || crypto.randomUUID(),
             name: ii === 0 ? `host-${i}` : generateRandomString(6),
             ipv4: status ? ii === 0 ? ipv4 : `10.${segment2}.${segment3}.${ii + 2}` : undefined,
             ipv6: undefined,
             version: Math.round(rand(0, 1)) ? `2.0.0` : undefined,
+            server: false,
+            relay: true,
             up: ii === 0 ? 0 : rand(1, 1024 * 1024),
             down: ii === 0 ? 0 : rand(1, 1024 * 1024),
             cost: ii === 0 ? 0 : Math.round(rand(1, 2)),
             lost: ii === 0 ? 0 : rand(1, 15),
             latency: ii === 0 ? 0 : rand(1, 100),
-            time: ii + 1,
           }
+          return peer
         }),
       }
     })
@@ -36,35 +38,14 @@ export function instancesMock(length = 3) {
       version: status ? `2.0.0` : undefined,
       hostname: status ? `host-${i}` : undefined,
       config: { str: generateInstanceStrDefault(), obj: {} },
-      natType: [NatType.fullCone, NatType.portRestrictedCone, NatType.restrictedCone, NatType.symmetric, NatType.unknown].splice(Math.floor(rand(0, 3)))[0].toUpperCase(),
+      udpNatType: Math.round(rand(0, 7)),
+      tcpNatType: Math.round(rand(0, 7)),
       events: [],
+      prps: [],
       status,
       stats,
     } as InstanceData
   })
-}
-
-export function generateInstanceWithDefaultConfig(name?: string) {
-  const id = crypto.randomUUID()
-  return {
-    id,
-    name: name ?? `Instance ${generateRandomString(6)}`,
-    config: { str: generateInstanceStrDefault(), obj: {} },
-    events: [],
-    status: false,
-    stats: [],
-  } as InstanceData
-}
-
-export function generateInstanceWithConfig(config: any) {
-  return {
-    id: config.id ?? crypto.randomUUID(),
-    name: config.instance_name,
-    config,
-    events: [],
-    status: false,
-    stats: [],
-  } as InstanceData
 }
 
 export function generateInstanceStrDefault(name: string = 'instance-default') {

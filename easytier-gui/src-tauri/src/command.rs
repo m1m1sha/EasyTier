@@ -3,14 +3,11 @@ use std::{
     time::Duration,
 };
 
-use anyhow::Context;
 use chrono::{DateTime, Local};
 use dashmap::DashMap;
 use easytier::{
     common::{
-        config::{
-            ConfigLoader, Flags, NetworkIdentity, PeerConfig, TomlConfigLoader, VpnPortalConfig,
-        },
+        config::{ConfigLoader, TomlConfigLoader},
         global_ctx::GlobalCtxEvent,
     },
     launcher::NetworkInstance,
@@ -62,109 +59,6 @@ impl NetworkConfig {
     pub fn from_str(s: &str) -> Result<TomlConfigLoader, anyhow::Error> {
         Ok(TomlConfigLoader::new_from_str(s)?)
     }
-
-    fn gen_config(&self) -> Result<TomlConfigLoader, anyhow::Error> {
-        let cfg = TomlConfigLoader::default();
-        cfg.set_id(
-            self.instance_id
-                .parse()
-                .with_context(|| format!("failed to parse instance id: {}", self.instance_id))?,
-        );
-        cfg.set_hostname(self.hostname.clone());
-        cfg.set_dhcp(self.dhcp);
-        cfg.set_inst_name(self.network_name.clone());
-        cfg.set_network_identity(NetworkIdentity::new(
-            self.network_name.clone(),
-            self.network_secret.clone(),
-        ));
-
-        if !self.dhcp {
-            if self.virtual_ipv4.len() > 0 {
-                cfg.set_ipv4(Some(self.virtual_ipv4.parse().with_context(|| {
-                    format!("failed to parse ipv4 address: {}", self.virtual_ipv4)
-                })?))
-            }
-        }
-
-        match self.networking_method {
-            NetworkingMethod::PublicServer => {
-                cfg.set_peers(vec![PeerConfig {
-                    uri: self.public_server_url.parse().with_context(|| {
-                        format!(
-                            "failed to parse public server uri: {}",
-                            self.public_server_url
-                        )
-                    })?,
-                }]);
-            }
-            NetworkingMethod::Manual => {
-                let mut peers = vec![];
-                for peer_url in self.peer_urls.iter() {
-                    if peer_url.is_empty() {
-                        continue;
-                    }
-                    peers.push(PeerConfig {
-                        uri: peer_url
-                            .parse()
-                            .with_context(|| format!("failed to parse peer uri: {}", peer_url))?,
-                    });
-                }
-
-                cfg.set_peers(peers);
-            }
-            NetworkingMethod::Standalone => {}
-        }
-
-        let mut listener_urls = vec![];
-        for listener_url in self.listener_urls.iter() {
-            if listener_url.is_empty() {
-                continue;
-            }
-            listener_urls.push(
-                listener_url
-                    .parse()
-                    .with_context(|| format!("failed to parse listener uri: {}", listener_url))?,
-            );
-        }
-        cfg.set_listeners(listener_urls);
-
-        for n in self.proxy_cidrs.iter() {
-            cfg.add_proxy_cidr(
-                n.parse()
-                    .with_context(|| format!("failed to parse proxy network: {}", n))?,
-            );
-        }
-
-        cfg.set_rpc_portal(
-            format!("0.0.0.0:{}", self.rpc_port)
-                .parse()
-                .with_context(|| format!("failed to parse rpc portal port: {}", self.rpc_port))?,
-        );
-
-        if self.enable_vpn_portal {
-            let cidr = format!(
-                "{}/{}",
-                self.vpn_portal_client_network_addr, self.vpn_portal_client_network_len
-            );
-            cfg.set_vpn_portal_config(VpnPortalConfig {
-                client_cidr: cidr
-                    .parse()
-                    .with_context(|| format!("failed to parse vpn portal client cidr: {}", cidr))?,
-                wireguard_listen: format!("0.0.0.0:{}", self.vpn_portal_listen_port)
-                    .parse()
-                    .with_context(|| {
-                        format!(
-                            "failed to parse vpn portal wireguard listen port. {}",
-                            self.vpn_portal_listen_port
-                        )
-                    })?,
-            });
-        }
-        let mut flags = Flags::default();
-        flags.latency_first = self.latency_first;
-        cfg.set_flags(flags);
-        Ok(cfg)
-    }
 }
 
 static INSTANCE_MAP: once_cell::sync::Lazy<DashMap<String, NetworkInstance>> =
@@ -175,7 +69,7 @@ pub static mut LOGGER_LEVEL_SENDER: once_cell::sync::Lazy<Option<NewFilterSender
 
 static EMIT_INSTANCE_INFO: once_cell::sync::Lazy<AtomicBool> =
     once_cell::sync::Lazy::new(|| AtomicBool::new(false));
-    
+
 static EMIT_INSTANCE_INFO_DELAY: once_cell::sync::Lazy<AtomicU64> =
     once_cell::sync::Lazy::new(|| AtomicU64::new(3));
 
@@ -205,7 +99,8 @@ pub struct InstanceInstantData {
     ipv4: String,
     version: String,
     hostname: String,
-    nat_type: String,
+    udp_nat_type: i32,
+    tcp_nat_type: i32,
     events: Vec<(DateTime<Local>, GlobalCtxEvent)>,
     prps: Vec<PeerRoutePair>,
     status: bool,
@@ -225,6 +120,8 @@ pub struct InstancePeer {
     ipv4: Option<String>,
     ipv6: Option<String>,
     version: String,
+    server: bool,
+    relay: bool,
     up: u64,
     down: u64,
     cost: i32,
@@ -234,7 +131,6 @@ pub struct InstancePeer {
 
 #[tauri::command]
 pub async fn run_network_instance(app: AppHandle, cfg: String) -> Result<(), String> {
-    println!("instance config: {:?}", cfg.clone());
     let cfg = NetworkConfig::from_str(&cfg).map_err(|e| e.to_string())?;
     let instance_id = cfg.get_id().to_string();
     let network = cfg.get_network_identity().clone();
@@ -262,12 +158,18 @@ pub async fn run_network_instance(app: AppHandle, cfg: String) -> Result<(), Str
                             .peer_route_pairs
                             .iter()
                             .map(|prp| {
+                                let (server, relay) = match prp.route.feature_flag {
+                                    Some(f) => (f.is_public_server, !f.no_relay_data),
+                                    None => (false, true),
+                                };
                                 return InstancePeer {
                                     id: prp.route.inst_id.clone(),
                                     name: prp.route.hostname.clone(),
                                     ipv4: Some(prp.route.ipv4_addr.clone()),
                                     ipv6: None,
                                     version: prp.route.version.clone(),
+                                    server,
+                                    relay,
                                     cost: prp.route.cost,
                                     latency: prp.get_latency_ms().unwrap_or_default(),
                                     lost: prp.get_loss_rate().unwrap_or_default(),
@@ -276,7 +178,7 @@ pub async fn run_network_instance(app: AppHandle, cfg: String) -> Result<(), Str
                                 };
                             })
                             .collect();
-                        println!("instance {} peers {:?} ", instance.key(), info.peer_route_pairs);
+                        // println!("instance {} peers {:?} ", instance.key(), info.peer_route_pairs);
                         ret.push(InstanceInstantData {
                             id: instance.key().clone().to_lowercase(),
                             events: info.events,
@@ -284,12 +186,8 @@ pub async fn run_network_instance(app: AppHandle, cfg: String) -> Result<(), Str
                             ipv4: info.my_node_info.virtual_ipv4,
                             version: info.my_node_info.version,
                             hostname: info.my_node_info.hostname,
-                            nat_type: info
-                                .my_node_info
-                                .stun_info
-                                .udp_nat_type()
-                                .as_str_name()
-                                .to_string(),
+                            udp_nat_type: info.my_node_info.stun_info.udp_nat_type,
+                            tcp_nat_type: info.my_node_info.stun_info.tcp_nat_type,
                             prps: info.peer_route_pairs.clone(),
                             stat: InstanceTimePeer { time: now, peers },
                         });
@@ -308,7 +206,10 @@ pub async fn run_network_instance(app: AppHandle, cfg: String) -> Result<(), Str
 
                 let _ = app.emit(INSTANCE_INFO_EVENT, &ret);
                 ret.clear();
-                tokio::time::sleep(Duration::from_secs(EMIT_INSTANCE_INFO_DELAY.load(Ordering::Relaxed))).await;
+                tokio::time::sleep(Duration::from_secs(
+                    EMIT_INSTANCE_INFO_DELAY.load(Ordering::Relaxed),
+                ))
+                .await;
             }
         });
     }
