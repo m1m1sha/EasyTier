@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Server } from 'lucide-vue-next'
 import type { InstanceChartStat, InstanceData, InstancePeerDetail, InstancePeerStat } from '~/types/components'
 
 const props = defineProps<PeerDetailProps>()
@@ -58,15 +59,23 @@ const currentStatsData = computed(() => {
 const deviceConnStatus = computed(() => {
   return currentStatsData.value.server ? t('component.instance.peerDetail.server') : currentStatsData.value.cost > 0 ? currentStatsData.value.cost === 1 ? 'p2p' : `relay(${currentStatsData.value.cost})` : t('component.instance.peerDetail.local')
 })
+
+const deviceName = computed(() => {
+  const name = props.local ? props.instance.hostname : detailStatsData.value.name
+  return currentStatsData.value.server && name?.includes('PublicServer_') ? name.replace('PublicServer_', '') : name
+})
 </script>
 
 <template>
   <div class="border rounded-xl p-4 w-auto flex flex-col space-y-2 overflow-hidden relative">
-    <div class="flex mb-2">
+    <div class="flex justify-between items-center">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger as-child>
-            <span class="font-semibold leading-none tracking-tight max-w-[120px] truncate">{{ props.local ? props.instance.hostname : detailStatsData.name }}</span>
+            <span class="font-semibold tracking-tight flex-1 truncate">
+              <Server v-if="currentStatsData.server" class="absolute left-4 top-4 size-5" />
+              <span :class="currentStatsData.server ? 'pl-7' : ''">{{ deviceName }}</span>
+            </span>
           </TooltipTrigger>
           <TooltipContent>
             <p>{{ props.local ? props.instance.hostname : detailStatsData.name }}</p>
@@ -76,12 +85,14 @@ const deviceConnStatus = computed(() => {
       <span class="text-xs text-gray-500 ml-2">{{ version }}</span>
     </div>
     <div v-if="props.instance?.status">
-      <Badge v-if="!currentStatsData.server" class="!bg-primary/85 mr-2 mt-2">
-        {{ `IP: ${(props.local ? props.instance.ipv4 : currentStatsData.ipv4) || 'N/A'}` }}
-      </Badge>
-      <Badge variant="secondary" class="mr-2 mt-2">
-        {{ deviceConnStatus }}
-      </Badge>
+      <template v-if="!currentStatsData.server">
+        <Badge class="!bg-primary/85 mr-2 mt-2">
+          {{ `IP: ${(props.local ? props.instance.ipv4 : currentStatsData.ipv4) || 'N/A'}` }}
+        </Badge>
+        <Badge variant="secondary" class="mr-2 mt-2">
+          {{ deviceConnStatus }}
+        </Badge>
+      </template>
       <Badge v-if="currentStatsData.relay" variant="secondary" class="mr-2 mt-2">
         {{ t('component.instance.peerDetail.relay') }}
       </Badge>
@@ -153,7 +164,10 @@ const deviceConnStatus = computed(() => {
       <HoverCard>
         <HoverCardTrigger as-child>
           <Badge variant="outline" class="mr-2 mt-2">
-            <NumberAnimation :to="chartStatsData.at(-1)?.total" :prefix="`${t('component.instance.peerDetail.deviceNum')}: `" />
+            <NumberAnimation
+              :to="chartStatsData.at(-1)?.total"
+              :prefix="`${t('component.instance.peerDetail.deviceNum')}: `"
+            />
           </Badge>
         </HoverCardTrigger>
         <HoverCardContent class="!p-0">
@@ -199,6 +213,9 @@ const deviceConnStatus = computed(() => {
         </HoverCardContent>
       </HoverCard>
     </div>
+    <!-- <div v-if="currentStatsData.server" class="absolute top-2 right-2 !mt-0">
+      <Server class="w-6 h-6" />
+    </div> -->
     <!-- <Cable class="absolute top-[-32px] right-[-16px] w-20 h-20 text-gray-600 rotate-45" /> -->
   </div>
 </template>
