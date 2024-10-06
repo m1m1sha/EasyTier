@@ -23,6 +23,9 @@ importers:
       '@tauri-apps/api':
         specifier: 2.0.0-rc.3
         version: 2.0.0-rc.3
+      '@tauri-apps/plugin-autostart':
+        specifier: ~2
+        version: 2.0.0
       '@tauri-apps/plugin-os':
         specifier: ^2.0.0
         version: 2.0.0
@@ -101,6 +104,9 @@ importers:
       vue-router:
         specifier: ^4.4.5
         version: 4.4.5(vue@3.5.11(typescript@5.6.2))
+      vue3-simple-icons:
+        specifier: ^13.2.0
+        version: 13.2.0(typescript@5.6.2)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -1216,6 +1222,9 @@ packages:
     resolution: {integrity: sha512-fCheW0iWYWUtFV3ui3HlMhk3ZJpAQ5KJr7B7UmfhDzBSy1h5JBdrCtvDwy+3AcPN+Fg5Ey3JciF8zEP8eBx+vQ==}
     engines: {node: '>= 10'}
     hasBin: true
+
+  '@tauri-apps/plugin-autostart@2.0.0':
+    resolution: {integrity: sha512-NEwOQWVasZ8RczXkMLNJokRDujneuMH/UFA5t84DLkbNZUmiD3G7HZWhgSd1YQ0BFU9h9w+h2B/py3y6bzWg4Q==}
 
   '@tauri-apps/plugin-os@2.0.0':
     resolution: {integrity: sha512-M7hG/nNyQYTJxVG/UhTKhp9mpXriwWzrs9mqDreB8mIgqA3ek5nHLdwRZJWhkKjZrnDT4v9CpA9BhYeplTlAiA==}
@@ -4349,6 +4358,9 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
+  vue3-simple-icons@13.2.0:
+    resolution: {integrity: sha512-RCAr9gCQEDtHbQZ5xBPXm4+y6RWUZkER3yimb/XgJlAwK0UuwecTLw3kGXHvemfaCCSDBO3PqyPryIXHyZMgWw==}
+
   vue@3.5.11:
     resolution: {integrity: sha512-/8Wurrd9J3lb72FTQS7gRMNQD4nztTtKPmuDuPuhqXmmpD6+skVjAeahNpVzsuky6Sy9gy7wn8UadqPtt9SQIg==}
     peerDependencies:
@@ -5439,6 +5451,10 @@ snapshots:
       '@tauri-apps/cli-win32-arm64-msvc': 2.0.1
       '@tauri-apps/cli-win32-ia32-msvc': 2.0.1
       '@tauri-apps/cli-win32-x64-msvc': 2.0.1
+
+  '@tauri-apps/plugin-autostart@2.0.0':
+    dependencies:
+      '@tauri-apps/api': 2.0.1
 
   '@tauri-apps/plugin-os@2.0.0':
     dependencies:
@@ -9170,6 +9186,12 @@ snapshots:
       '@vue/language-core': 2.1.6(typescript@5.6.2)
       semver: 7.6.3
       typescript: 5.6.2
+
+  vue3-simple-icons@13.2.0(typescript@5.6.2):
+    dependencies:
+      vue: 3.5.11(typescript@5.6.2)
+    transitivePeerDependencies:
+      - typescript
 
   vue@3.5.11(typescript@5.6.2):
     dependencies:

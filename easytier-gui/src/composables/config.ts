@@ -85,3 +85,10 @@ export const configCommonSchema = computed<ZodObjectOrWrapped>(() => z.object({
 }))
 
 export const DEFAULT_DEPENDENCIES = {}
+
+export const appAutostartSchema = computed<ZodObjectOrWrapped>(() => {
+  return z.object({
+    autostart: z.boolean().default(false),
+    list: z.array(z.string()).optional(),
+  })
+})

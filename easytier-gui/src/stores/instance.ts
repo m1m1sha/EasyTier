@@ -1,3 +1,4 @@
+import { parse, stringify } from 'smol-toml'
 import type { InstanceData } from '~/types/components'
 
 export const useInstanceStore = defineStore('instanceStore', () => {
@@ -22,6 +23,26 @@ export const useInstanceStore = defineStore('instanceStore', () => {
     return currentInstance.value?.stats.at(-1)?.peers
   })
 
+  async function toggleInstanceStatus(id: string) {
+    const curInstance = instances.value.find(i => i.id === id)
+
+    if (curInstance) {
+      if (curInstance?.status) {
+        await stopNetworkInstance(id)
+      }
+      else {
+        const toml = parse(curInstance!.config.str)
+        toml.instance_id = id
+        instances.value.forEach((i) => {
+          if (i.id === id) {
+            i.stats = []
+          }
+        })
+        await startNetworkInstance(stringify(toml))
+      }
+    }
+  }
+
   return {
     instances,
     selectedId,
@@ -45,6 +66,7 @@ export const useInstanceStore = defineStore('instanceStore', () => {
       if (selectedId.value === id)
         selectedId.value = ''
     },
+    toggleInstanceStatus,
   }
 }, {
   persist: true,

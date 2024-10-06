@@ -48,28 +48,26 @@ fn check_sudo() -> bool {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    #[cfg(not(target_os = "android"))]
-    if !check_sudo() {
-        use std::process;
-        process::exit(0);
-    }
+    #[cfg(not(mobile))]
+    {
+        if !check_sudo() {
+            use std::process;
+            process::exit(0);
+        }
 
-    #[cfg(not(target_os = "android"))]
-    utils::setup_panic_handler();
+        utils::setup_panic_handler();
+    }
 
     let mut builder = tauri::Builder::default();
 
-    #[cfg(not(target_os = "android"))]
+    #[cfg(not(mobile))]
     {
         use tauri_plugin_autostart::MacosLauncher;
         builder = builder.plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             Some(vec![AUTOSTART_ARG]),
         ));
-    }
-
-    #[cfg(not(any(target_os = "android", target_os = "ios")))]
-    {
+        
         builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
             app.webview_windows()
                 .values()
@@ -105,7 +103,7 @@ pub fn run() {
             unsafe { LOGGER_LEVEL_SENDER.replace(logger_reinit) };
 
             // for tray icon, menu need to be built in js
-            #[cfg(not(target_os = "android"))]
+            #[cfg(not(mobile))]
             let _tray_menu = TrayIconBuilder::with_id("main")
                 .menu_on_left_click(false)
                 .on_tray_icon_event(|tray, event| {
@@ -138,7 +136,7 @@ pub fn run() {
             command::easytier_version
         ])
         .on_window_event(|win, event| match event {
-            #[cfg(not(target_os = "android"))]
+            #[cfg(not(mobile))]
             tauri::WindowEvent::CloseRequested { api, .. } => {
                 let _ = win.emit(CLOSE_REQUESTED_EVENT, ());
                 api.prevent_close();
