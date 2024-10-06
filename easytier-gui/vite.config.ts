@@ -54,7 +54,7 @@ export default defineConfig({
       dts: 'src/auto-imports.d.ts',
       dirs: [
         'src/composables',
-        'src/composables/**/**',
+        'src/components/**/**',
         'src/stores',
         'src/types',
         'src/lib',

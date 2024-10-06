@@ -48,11 +48,11 @@ fn check_sudo() -> bool {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    // #[cfg(not(target_os = "android"))]
-    // if !check_sudo() {
-    //     use std::process;
-    //     process::exit(0);
-    // }
+    #[cfg(not(target_os = "android"))]
+    if !check_sudo() {
+        use std::process;
+        process::exit(0);
+    }
 
     #[cfg(not(target_os = "android"))]
     utils::setup_panic_handler();

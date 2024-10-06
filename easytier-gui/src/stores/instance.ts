@@ -1,4 +1,4 @@
-import type { InstanceChartStat, InstanceData } from '~/types/components'
+import type { InstanceData } from '~/types/components'
 
 export const useInstanceStore = defineStore('instanceStore', () => {
   const instances = ref<InstanceData[]>(isDev ? instancesMock() : [])
@@ -22,18 +22,10 @@ export const useInstanceStore = defineStore('instanceStore', () => {
     return currentInstance.value?.stats.at(-1)?.peers
   })
 
-  const chartStatsData = computed(() => (currentInstance.value?.stats.slice(-15) ?? []).map(item => ({
-    time: item.time,
-    total: item.peers.length,
-    up: item.peers.reduce((a, c) => a + c.up, 0),
-    down: item.peers.reduce((a, c) => a + c.down, 0),
-  } as InstanceChartStat)) ?? [])
-
   return {
     instances,
     selectedId,
     currentInstance,
-    chartStatsData,
     statusIpv4,
     statusUpTotal,
     statusDownTotal,

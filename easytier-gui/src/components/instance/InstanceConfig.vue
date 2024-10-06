@@ -15,8 +15,6 @@ import {
 const instanceStore = useInstanceStore()
 const { currentInstance } = storeToRefs(instanceStore)
 
-const el = ref(null)
-const { width, height } = useElementSize(el)
 const { t } = useI18n()
 const formSchema = toTypedSchema(z.object({
   network_name: z.string().max(50),
@@ -53,7 +51,7 @@ const configStr = computed({
 </script>
 
 <template>
-  <div ref="el" class="flex h-full space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+  <div class="flex h-full space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
     <form v-if="false" class="space-y-6" @submit="onSubmit">
       <FormField v-slot="{ componentField }" name="network_name">
         <FormItem>
@@ -133,7 +131,7 @@ const configStr = computed({
         {{ t('form.instance.submit') }}
       </Button>
     </form>
-    <CodeEdit v-if="currentInstance" v-model="configStr" :style="{ width: `${width}px`, height: `${height}px` }" class="flex-1" />
+    <CodeEdit v-if="currentInstance" v-model="configStr" class="flex-1" />
   </div>
 </template>
 

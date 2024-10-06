@@ -12,41 +12,38 @@ import '~/styles/codeMirror.css'
 const props = defineProps<{
   modelValue: string
 }>()
-
 const emits = defineEmits<{
-  'update:modelValue': [code: string]
+  'update:modelValue': [value: string]
 }>()
+const tRefresh = ref<NodeJS.Timeout | null>()
 
-const t = ref<NodeJS.Timeout | null>()
-
-function onChange(value: string) {
-  if (t.value !== null) {
-    clearTimeout(t.value)
-  }
-  t.value = setTimeout(() => {
-    emits('update:modelValue', value)
-  }, 100)
-}
+const modelValue = useVModel(props, 'modelValue', emits, {
+  passive: true,
+  defaultValue: props.modelValue,
+})
 
 const cmRef = ref<CmComponentRef>()
 const cmOptions: EditorConfiguration = {
   mode: 'text/x-toml',
   theme: 'easytier-dark',
+  lineWrapping: true,
 }
 
 onMounted(() => {
-  setTimeout(() => {
+  tRefresh.value = setTimeout(() => {
     cmRef.value?.refresh()
   }, 100)
 })
 
 onUnmounted(() => {
+  if (tRefresh.value)
+    clearTimeout(tRefresh.value)
   cmRef.value?.destroy()
 })
 </script>
 
 <template>
-  <CodeMirror ref="cmRef" :value="props.modelValue" :options="cmOptions" class="border rounded-md flex-1" @change="onChange" />
+  <CodeMirror ref="cmRef" v-model:value="modelValue" :options="cmOptions" class="border rounded-md flex-1" />
   <!-- <CodeMirror
     v-model="code"
     basic

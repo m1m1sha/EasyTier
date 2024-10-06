@@ -6,20 +6,196 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const Accordion: typeof import('./components/ui/accordion/index')['Accordion']
+  const AccordionContent: typeof import('./components/ui/accordion/index')['AccordionContent']
+  const AccordionItem: typeof import('./components/ui/accordion/index')['AccordionItem']
+  const AccordionTrigger: typeof import('./components/ui/accordion/index')['AccordionTrigger']
+  const Alert: typeof import('./components/ui/alert/index')['Alert']
+  const AlertDescription: typeof import('./components/ui/alert/index')['AlertDescription']
+  const AlertDialog: typeof import('./components/ui/alert-dialog/index')['AlertDialog']
+  const AlertDialogAction: typeof import('./components/ui/alert-dialog/index')['AlertDialogAction']
+  const AlertDialogCancel: typeof import('./components/ui/alert-dialog/index')['AlertDialogCancel']
+  const AlertDialogContent: typeof import('./components/ui/alert-dialog/index')['AlertDialogContent']
+  const AlertDialogDescription: typeof import('./components/ui/alert-dialog/index')['AlertDialogDescription']
+  const AlertDialogFooter: typeof import('./components/ui/alert-dialog/index')['AlertDialogFooter']
+  const AlertDialogHeader: typeof import('./components/ui/alert-dialog/index')['AlertDialogHeader']
+  const AlertDialogTitle: typeof import('./components/ui/alert-dialog/index')['AlertDialogTitle']
+  const AlertDialogTrigger: typeof import('./components/ui/alert-dialog/index')['AlertDialogTrigger']
+  const AlertTitle: typeof import('./components/ui/alert/index')['AlertTitle']
+  const AreaChart: typeof import('./components/ui/chart-area/index')['AreaChart']
+  const AutoForm: typeof import('./components/ui/auto-form/index')['AutoForm']
+  const AutoFormField: typeof import('./components/ui/auto-form/index')['AutoFormField']
+  const AutoFormFieldArray: typeof import('./components/ui/auto-form/index')['AutoFormFieldArray']
+  const AutoFormFieldBoolean: typeof import('./components/ui/auto-form/index')['AutoFormFieldBoolean']
+  const AutoFormFieldDate: typeof import('./components/ui/auto-form/index')['AutoFormFieldDate']
+  const AutoFormFieldEnum: typeof import('./components/ui/auto-form/index')['AutoFormFieldEnum']
+  const AutoFormFieldFile: typeof import('./components/ui/auto-form/index')['AutoFormFieldFile']
+  const AutoFormFieldInput: typeof import('./components/ui/auto-form/index')['AutoFormFieldInput']
+  const AutoFormFieldNumber: typeof import('./components/ui/auto-form/index')['AutoFormFieldNumber']
+  const AutoFormFieldObject: typeof import('./components/ui/auto-form/index')['AutoFormFieldObject']
+  const AutoFormLabel: typeof import('./components/ui/auto-form/index')['AutoFormLabel']
+  const Badge: typeof import('./components/ui/badge/index')['Badge']
+  const BarChart: typeof import('./components/ui/chart-bar/index')['BarChart']
+  const Button: typeof import('./components/ui/button/index')['Button']
+  const Calendar: typeof import('./components/ui/calendar/index')['Calendar']
+  const CalendarCell: typeof import('./components/ui/calendar/index')['CalendarCell']
+  const CalendarCellTrigger: typeof import('./components/ui/calendar/index')['CalendarCellTrigger']
+  const CalendarGrid: typeof import('./components/ui/calendar/index')['CalendarGrid']
+  const CalendarGridBody: typeof import('./components/ui/calendar/index')['CalendarGridBody']
+  const CalendarGridHead: typeof import('./components/ui/calendar/index')['CalendarGridHead']
+  const CalendarGridRow: typeof import('./components/ui/calendar/index')['CalendarGridRow']
+  const CalendarHeadCell: typeof import('./components/ui/calendar/index')['CalendarHeadCell']
+  const CalendarHeader: typeof import('./components/ui/calendar/index')['CalendarHeader']
+  const CalendarHeading: typeof import('./components/ui/calendar/index')['CalendarHeading']
+  const CalendarNextButton: typeof import('./components/ui/calendar/index')['CalendarNextButton']
+  const CalendarPrevButton: typeof import('./components/ui/calendar/index')['CalendarPrevButton']
+  const Card: typeof import('./components/ui/card/index')['Card']
+  const CardContent: typeof import('./components/ui/card/index')['CardContent']
+  const CardDescription: typeof import('./components/ui/card/index')['CardDescription']
+  const CardFooter: typeof import('./components/ui/card/index')['CardFooter']
+  const CardHeader: typeof import('./components/ui/card/index')['CardHeader']
+  const CardTitle: typeof import('./components/ui/card/index')['CardTitle']
+  const ChartCrosshair: typeof import('./components/ui/chart/index')['ChartCrosshair']
+  const ChartLegend: typeof import('./components/ui/chart/index')['ChartLegend']
+  const ChartSingleTooltip: typeof import('./components/ui/chart/index')['ChartSingleTooltip']
+  const ChartTooltip: typeof import('./components/ui/chart/index')['ChartTooltip']
+  const Checkbox: typeof import('./components/ui/checkbox/index')['Checkbox']
+  const ContextMenu: typeof import('./components/ui/context-menu/index')['ContextMenu']
+  const ContextMenuCheckboxItem: typeof import('./components/ui/context-menu/index')['ContextMenuCheckboxItem']
+  const ContextMenuContent: typeof import('./components/ui/context-menu/index')['ContextMenuContent']
+  const ContextMenuGroup: typeof import('./components/ui/context-menu/index')['ContextMenuGroup']
+  const ContextMenuItem: typeof import('./components/ui/context-menu/index')['ContextMenuItem']
+  const ContextMenuLabel: typeof import('./components/ui/context-menu/index')['ContextMenuLabel']
+  const ContextMenuRadioGroup: typeof import('./components/ui/context-menu/index')['ContextMenuRadioGroup']
+  const ContextMenuRadioItem: typeof import('./components/ui/context-menu/index')['ContextMenuRadioItem']
+  const ContextMenuSeparator: typeof import('./components/ui/context-menu/index')['ContextMenuSeparator']
+  const ContextMenuShortcut: typeof import('./components/ui/context-menu/index')['ContextMenuShortcut']
+  const ContextMenuSub: typeof import('./components/ui/context-menu/index')['ContextMenuSub']
+  const ContextMenuSubContent: typeof import('./components/ui/context-menu/index')['ContextMenuSubContent']
+  const ContextMenuSubTrigger: typeof import('./components/ui/context-menu/index')['ContextMenuSubTrigger']
+  const ContextMenuTrigger: typeof import('./components/ui/context-menu/index')['ContextMenuTrigger']
   const DEFAULT_CONFIG_SCHEMA: typeof import('./composables/config')['DEFAULT_CONFIG_SCHEMA']
   const DEFAULT_CREATE_CONFIG_SCHEMA: typeof import('./composables/config')['DEFAULT_CREATE_CONFIG_SCHEMA']
   const DEFAULT_CREATE_FIELD_CONFIG: typeof import('./composables/config')['DEFAULT_CREATE_FIELD_CONFIG']
   const DEFAULT_DEPENDENCIES: typeof import('./composables/config')['DEFAULT_DEPENDENCIES']
   const DEFAULT_FIELD_CONFIG: typeof import('./composables/config')['DEFAULT_FIELD_CONFIG']
+  const DEFAULT_ZOD_HANDLERS: typeof import('./components/ui/auto-form/constant')['DEFAULT_ZOD_HANDLERS']
+  const DependencyType: typeof import('./components/ui/auto-form/interface')['DependencyType']
+  const Dialog: typeof import('./components/ui/dialog/index')['Dialog']
+  const DialogClose: typeof import('./components/ui/dialog/index')['DialogClose']
+  const DialogContent: typeof import('./components/ui/dialog/index')['DialogContent']
+  const DialogDescription: typeof import('./components/ui/dialog/index')['DialogDescription']
+  const DialogFooter: typeof import('./components/ui/dialog/index')['DialogFooter']
+  const DialogHeader: typeof import('./components/ui/dialog/index')['DialogHeader']
+  const DialogScrollContent: typeof import('./components/ui/dialog/index')['DialogScrollContent']
+  const DialogTitle: typeof import('./components/ui/dialog/index')['DialogTitle']
+  const DialogTrigger: typeof import('./components/ui/dialog/index')['DialogTrigger']
+  const Drawer: typeof import('./components/ui/drawer/index')['Drawer']
+  const DrawerClose: typeof import('./components/ui/drawer/index')['DrawerClose']
+  const DrawerContent: typeof import('./components/ui/drawer/index')['DrawerContent']
+  const DrawerDescription: typeof import('./components/ui/drawer/index')['DrawerDescription']
+  const DrawerFooter: typeof import('./components/ui/drawer/index')['DrawerFooter']
+  const DrawerHeader: typeof import('./components/ui/drawer/index')['DrawerHeader']
+  const DrawerOverlay: typeof import('./components/ui/drawer/index')['DrawerOverlay']
+  const DrawerPortal: typeof import('./components/ui/drawer/index')['DrawerPortal']
+  const DrawerTitle: typeof import('./components/ui/drawer/index')['DrawerTitle']
+  const DrawerTrigger: typeof import('./components/ui/drawer/index')['DrawerTrigger']
+  const DropdownMenu: typeof import('./components/ui/dropdown-menu/index')['DropdownMenu']
+  const DropdownMenuCheckboxItem: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuCheckboxItem']
+  const DropdownMenuContent: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuContent']
+  const DropdownMenuGroup: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuGroup']
+  const DropdownMenuItem: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuItem']
+  const DropdownMenuLabel: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuLabel']
+  const DropdownMenuPortal: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuPortal']
+  const DropdownMenuRadioGroup: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuRadioGroup']
+  const DropdownMenuRadioItem: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuRadioItem']
+  const DropdownMenuSeparator: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSeparator']
+  const DropdownMenuShortcut: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuShortcut']
+  const DropdownMenuSub: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSub']
+  const DropdownMenuSubContent: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSubContent']
+  const DropdownMenuSubTrigger: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSubTrigger']
+  const DropdownMenuTrigger: typeof import('./components/ui/dropdown-menu/index')['DropdownMenuTrigger']
   const EffectScope: typeof import('vue')['EffectScope']
+  const FORM_ITEM_INJECTION_KEY: typeof import('./components/ui/form/injectionKeys')['FORM_ITEM_INJECTION_KEY']
+  const Form: typeof import('./components/ui/form/index')['Form']
+  const FormControl: typeof import('./components/ui/form/index')['FormControl']
+  const FormDescription: typeof import('./components/ui/form/index')['FormDescription']
+  const FormField: typeof import('./components/ui/form/index')['FormField']
+  const FormFieldArray: typeof import('./components/ui/form/index')['FormFieldArray']
+  const FormItem: typeof import('./components/ui/form/index')['FormItem']
+  const FormLabel: typeof import('./components/ui/form/index')['FormLabel']
+  const FormMessage: typeof import('./components/ui/form/index')['FormMessage']
+  const HoverCard: typeof import('./components/ui/hover-card/index')['HoverCard']
+  const HoverCardContent: typeof import('./components/ui/hover-card/index')['HoverCardContent']
+  const HoverCardTrigger: typeof import('./components/ui/hover-card/index')['HoverCardTrigger']
+  const INPUT_COMPONENTS: typeof import('./components/ui/auto-form/constant')['INPUT_COMPONENTS']
+  const Input: typeof import('./components/ui/input/index')['Input']
   const InstanceStatus: typeof import('./types/components')['InstanceStatus']
+  const Label: typeof import('./components/ui/label/index')['Label']
+  const LineChart: typeof import('./components/ui/chart-line/index')['LineChart']
   const NatType: typeof import('./types/components')['NatType']
+  const Popover: typeof import('./components/ui/popover/index')['Popover']
+  const PopoverAnchor: typeof import('./components/ui/popover/index')['PopoverAnchor']
+  const PopoverContent: typeof import('./components/ui/popover/index')['PopoverContent']
+  const PopoverTrigger: typeof import('./components/ui/popover/index')['PopoverTrigger']
+  const RadioGroup: typeof import('./components/ui/radio-group/index')['RadioGroup']
+  const RadioGroupItem: typeof import('./components/ui/radio-group/index')['RadioGroupItem']
+  const ScrollArea: typeof import('./components/ui/scroll-area/index')['ScrollArea']
+  const ScrollBar: typeof import('./components/ui/scroll-area/index')['ScrollBar']
+  const Select: typeof import('./components/ui/select/index')['Select']
+  const SelectContent: typeof import('./components/ui/select/index')['SelectContent']
+  const SelectGroup: typeof import('./components/ui/select/index')['SelectGroup']
+  const SelectItem: typeof import('./components/ui/select/index')['SelectItem']
+  const SelectItemText: typeof import('./components/ui/select/index')['SelectItemText']
+  const SelectLabel: typeof import('./components/ui/select/index')['SelectLabel']
+  const SelectScrollDownButton: typeof import('./components/ui/select/index')['SelectScrollDownButton']
+  const SelectScrollUpButton: typeof import('./components/ui/select/index')['SelectScrollUpButton']
+  const SelectSeparator: typeof import('./components/ui/select/index')['SelectSeparator']
+  const SelectTrigger: typeof import('./components/ui/select/index')['SelectTrigger']
+  const SelectValue: typeof import('./components/ui/select/index')['SelectValue']
+  const Separator: typeof import('./components/ui/separator/index')['Separator']
+  const Switch: typeof import('./components/ui/switch/index')['Switch']
+  const Table: typeof import('./components/ui/table/index')['Table']
+  const TableBody: typeof import('./components/ui/table/index')['TableBody']
+  const TableCaption: typeof import('./components/ui/table/index')['TableCaption']
+  const TableCell: typeof import('./components/ui/table/index')['TableCell']
+  const TableEmpty: typeof import('./components/ui/table/index')['TableEmpty']
+  const TableFooter: typeof import('./components/ui/table/index')['TableFooter']
+  const TableHead: typeof import('./components/ui/table/index')['TableHead']
+  const TableHeader: typeof import('./components/ui/table/index')['TableHeader']
+  const TableRow: typeof import('./components/ui/table/index')['TableRow']
+  const Tabs: typeof import('./components/ui/tabs/index')['Tabs']
+  const TabsContent: typeof import('./components/ui/tabs/index')['TabsContent']
+  const TabsList: typeof import('./components/ui/tabs/index')['TabsList']
+  const TabsTrigger: typeof import('./components/ui/tabs/index')['TabsTrigger']
+  const TagsInput: typeof import('./components/ui/tags-input/index')['TagsInput']
+  const TagsInputInput: typeof import('./components/ui/tags-input/index')['TagsInputInput']
+  const TagsInputItem: typeof import('./components/ui/tags-input/index')['TagsInputItem']
+  const TagsInputItemDelete: typeof import('./components/ui/tags-input/index')['TagsInputItemDelete']
+  const TagsInputItemText: typeof import('./components/ui/tags-input/index')['TagsInputItemText']
+  const Textarea: typeof import('./components/ui/textarea/index')['Textarea']
+  const Toast: typeof import('./components/ui/toast/index')['Toast']
+  const ToastAction: typeof import('./components/ui/toast/index')['ToastAction']
+  const ToastClose: typeof import('./components/ui/toast/index')['ToastClose']
+  const ToastDescription: typeof import('./components/ui/toast/index')['ToastDescription']
+  const ToastProvider: typeof import('./components/ui/toast/index')['ToastProvider']
+  const ToastTitle: typeof import('./components/ui/toast/index')['ToastTitle']
+  const ToastViewport: typeof import('./components/ui/toast/index')['ToastViewport']
+  const Toaster: typeof import('./components/ui/toast/index')['Toaster']
+  const Tooltip: typeof import('./components/ui/tooltip/index')['Tooltip']
+  const TooltipContent: typeof import('./components/ui/tooltip/index')['TooltipContent']
+  const TooltipProvider: typeof import('./components/ui/tooltip/index')['TooltipProvider']
+  const TooltipTrigger: typeof import('./components/ui/tooltip/index')['TooltipTrigger']
   const TransitionFunc: typeof import('./types/components')['TransitionFunc']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addInstanceWithConfig: typeof import('./composables/mock')['addInstanceWithConfig']
   const addInstanceWithDefaultConfig: typeof import('./composables/mock')['addInstanceWithDefaultConfig']
+  const alertVariants: typeof import('./components/ui/alert/index')['alertVariants']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const badgeVariants: typeof import('./components/ui/badge/index')['badgeVariants']
+  const beautifyObjectName: typeof import('./components/ui/auto-form/utils')['beautifyObjectName']
+  const buttonVariants: typeof import('./components/ui/button/index')['buttonVariants']
   const cn: typeof import('./lib/utils')['cn']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
@@ -46,10 +222,13 @@ declare global {
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
+  const defaultColors: typeof import('./components/ui/chart/index')['defaultColors']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
+  const dependencies: typeof import('./components/ui/auto-form/dependencies')['default']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
+  const easytierVersion: typeof import('./composables/instance')['easytierVersion']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const generateInstanceDefault: typeof import('./composables/mock')['generateInstanceDefault']
@@ -58,18 +237,26 @@ declare global {
   const generateInstanceWithDefaultConfig: typeof import('./composables/mock')['generateInstanceWithDefaultConfig']
   const generateRandomString: typeof import('./composables/utils')['generateRandomString']
   const getActivePinia: typeof import('pinia')['getActivePinia']
+  const getBaseSchema: typeof import('./components/ui/auto-form/utils')['getBaseSchema']
+  const getBaseType: typeof import('./components/ui/auto-form/utils')['getBaseType']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getDefaultValueInZodStack: typeof import('./components/ui/auto-form/utils')['getDefaultValueInZodStack']
+  const getFromPath: typeof import('./components/ui/auto-form/utils')['getFromPath']
+  const getIndexIfArray: typeof import('./components/ui/auto-form/utils')['getIndexIfArray']
+  const getObjectFormSchema: typeof import('./components/ui/auto-form/utils')['getObjectFormSchema']
   const h: typeof import('vue')['h']
   const humanStreamSize: typeof import('./composables/utils')['humanStreamSize']
   const humanStreamSizeSplit: typeof import('./composables/utils')['humanStreamSizeSplit']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
+  const injectDependencies: typeof import('./components/ui/auto-form/dependencies')['injectDependencies']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const instancesMock: typeof import('./composables/mock')['instancesMock']
   const isDefined: typeof import('@vueuse/core')['isDefined']
   const isDev: typeof import('./composables/utils')['isDev']
   const isMobile: typeof import('./composables/mobile')['isMobile']
+  const isNotNestedPath: typeof import('./components/ui/auto-form/utils')['isNotNestedPath']
   const isProd: typeof import('./composables/utils')['isProd']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
@@ -90,6 +277,7 @@ declare global {
   const natTypeNum2Str: typeof import('./composables/utils')['natTypeNum2Str']
   const natTypeStr2Num: typeof import('./composables/utils')['natTypeStr2Num']
   const nextTick: typeof import('vue')['nextTick']
+  const normalizeFormPath: typeof import('./components/ui/auto-form/utils')['normalizeFormPath']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
   const onBeforeRouteLeave: typeof import('vue-router')['onBeforeRouteLeave']
@@ -115,6 +303,7 @@ declare global {
   const pkg: typeof import('./composables/utils')['pkg']
   const platformIsMobile: typeof import('./composables/mobile')['platformIsMobile']
   const provide: typeof import('vue')['provide']
+  const provideDependencies: typeof import('./components/ui/auto-form/dependencies')['provideDependencies']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
@@ -152,6 +341,8 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
+  const toast: typeof import('./components/ui/toast/use-toast')['toast']
+  const toastVariants: typeof import('./components/ui/toast/index')['toastVariants']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
   const tryOnBeforeUnmount: typeof import('@vueuse/core')['tryOnBeforeUnmount']
@@ -226,6 +417,7 @@ declare global {
   const useFileSystemAccess: typeof import('@vueuse/core')['useFileSystemAccess']
   const useFocus: typeof import('@vueuse/core')['useFocus']
   const useFocusWithin: typeof import('@vueuse/core')['useFocusWithin']
+  const useFormField: typeof import('./components/ui/form/useFormField')['useFormField']
   const useFps: typeof import('@vueuse/core')['useFps']
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
   const useGamepad: typeof import('@vueuse/core')['useGamepad']
@@ -313,6 +505,7 @@ declare global {
   const useTitle: typeof import('@vueuse/core')['useTitle']
   const useToNumber: typeof import('@vueuse/core')['useToNumber']
   const useToString: typeof import('@vueuse/core')['useToString']
+  const useToast: typeof import('./components/ui/toast/use-toast')['useToast']
   const useToggle: typeof import('@vueuse/core')['useToggle']
   const useTransition: typeof import('@vueuse/core')['useTransition']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
@@ -353,6 +546,9 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
+  export type { DependencyType } from './components/ui/auto-form/interface'
+  import('./components/ui/auto-form/interface')
+  // @ts-ignore
   export type { InstanceStatus, NatType, TransitionFunc } from './types/components'
   import('./types/components')
 }
@@ -361,14 +557,190 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
+    readonly Accordion: UnwrapRef<typeof import('./components/ui/accordion/index')['Accordion']>
+    readonly AccordionContent: UnwrapRef<typeof import('./components/ui/accordion/index')['AccordionContent']>
+    readonly AccordionItem: UnwrapRef<typeof import('./components/ui/accordion/index')['AccordionItem']>
+    readonly AccordionTrigger: UnwrapRef<typeof import('./components/ui/accordion/index')['AccordionTrigger']>
+    readonly Alert: UnwrapRef<typeof import('./components/ui/alert/index')['Alert']>
+    readonly AlertDescription: UnwrapRef<typeof import('./components/ui/alert/index')['AlertDescription']>
+    readonly AlertDialog: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialog']>
+    readonly AlertDialogAction: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogAction']>
+    readonly AlertDialogCancel: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogCancel']>
+    readonly AlertDialogContent: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogContent']>
+    readonly AlertDialogDescription: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogDescription']>
+    readonly AlertDialogFooter: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogFooter']>
+    readonly AlertDialogHeader: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogHeader']>
+    readonly AlertDialogTitle: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogTitle']>
+    readonly AlertDialogTrigger: UnwrapRef<typeof import('./components/ui/alert-dialog/index')['AlertDialogTrigger']>
+    readonly AlertTitle: UnwrapRef<typeof import('./components/ui/alert/index')['AlertTitle']>
+    readonly AreaChart: UnwrapRef<typeof import('./components/ui/chart-area/index')['AreaChart']>
+    readonly AutoForm: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoForm']>
+    readonly AutoFormField: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormField']>
+    readonly AutoFormFieldArray: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldArray']>
+    readonly AutoFormFieldBoolean: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldBoolean']>
+    readonly AutoFormFieldDate: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldDate']>
+    readonly AutoFormFieldEnum: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldEnum']>
+    readonly AutoFormFieldFile: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldFile']>
+    readonly AutoFormFieldInput: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldInput']>
+    readonly AutoFormFieldNumber: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldNumber']>
+    readonly AutoFormFieldObject: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormFieldObject']>
+    readonly AutoFormLabel: UnwrapRef<typeof import('./components/ui/auto-form/index')['AutoFormLabel']>
+    readonly Badge: UnwrapRef<typeof import('./components/ui/badge/index')['Badge']>
+    readonly BarChart: UnwrapRef<typeof import('./components/ui/chart-bar/index')['BarChart']>
+    readonly Button: UnwrapRef<typeof import('./components/ui/button/index')['Button']>
+    readonly Calendar: UnwrapRef<typeof import('./components/ui/calendar/index')['Calendar']>
+    readonly CalendarCell: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarCell']>
+    readonly CalendarCellTrigger: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarCellTrigger']>
+    readonly CalendarGrid: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarGrid']>
+    readonly CalendarGridBody: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarGridBody']>
+    readonly CalendarGridHead: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarGridHead']>
+    readonly CalendarGridRow: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarGridRow']>
+    readonly CalendarHeadCell: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarHeadCell']>
+    readonly CalendarHeader: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarHeader']>
+    readonly CalendarHeading: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarHeading']>
+    readonly CalendarNextButton: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarNextButton']>
+    readonly CalendarPrevButton: UnwrapRef<typeof import('./components/ui/calendar/index')['CalendarPrevButton']>
+    readonly Card: UnwrapRef<typeof import('./components/ui/card/index')['Card']>
+    readonly CardContent: UnwrapRef<typeof import('./components/ui/card/index')['CardContent']>
+    readonly CardDescription: UnwrapRef<typeof import('./components/ui/card/index')['CardDescription']>
+    readonly CardFooter: UnwrapRef<typeof import('./components/ui/card/index')['CardFooter']>
+    readonly CardHeader: UnwrapRef<typeof import('./components/ui/card/index')['CardHeader']>
+    readonly CardTitle: UnwrapRef<typeof import('./components/ui/card/index')['CardTitle']>
+    readonly ChartCrosshair: UnwrapRef<typeof import('./components/ui/chart/index')['ChartCrosshair']>
+    readonly ChartLegend: UnwrapRef<typeof import('./components/ui/chart/index')['ChartLegend']>
+    readonly ChartSingleTooltip: UnwrapRef<typeof import('./components/ui/chart/index')['ChartSingleTooltip']>
+    readonly ChartTooltip: UnwrapRef<typeof import('./components/ui/chart/index')['ChartTooltip']>
+    readonly Checkbox: UnwrapRef<typeof import('./components/ui/checkbox/index')['Checkbox']>
+    readonly ContextMenu: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenu']>
+    readonly ContextMenuCheckboxItem: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuCheckboxItem']>
+    readonly ContextMenuContent: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuContent']>
+    readonly ContextMenuGroup: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuGroup']>
+    readonly ContextMenuItem: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuItem']>
+    readonly ContextMenuLabel: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuLabel']>
+    readonly ContextMenuRadioGroup: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuRadioGroup']>
+    readonly ContextMenuRadioItem: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuRadioItem']>
+    readonly ContextMenuSeparator: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuSeparator']>
+    readonly ContextMenuShortcut: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuShortcut']>
+    readonly ContextMenuSub: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuSub']>
+    readonly ContextMenuSubContent: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuSubContent']>
+    readonly ContextMenuSubTrigger: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuSubTrigger']>
+    readonly ContextMenuTrigger: UnwrapRef<typeof import('./components/ui/context-menu/index')['ContextMenuTrigger']>
     readonly DEFAULT_DEPENDENCIES: UnwrapRef<typeof import('./composables/config')['DEFAULT_DEPENDENCIES']>
+    readonly DEFAULT_ZOD_HANDLERS: UnwrapRef<typeof import('./components/ui/auto-form/constant')['DEFAULT_ZOD_HANDLERS']>
+    readonly DependencyType: UnwrapRef<typeof import('./components/ui/auto-form/interface')['DependencyType']>
+    readonly Dialog: UnwrapRef<typeof import('./components/ui/dialog/index')['Dialog']>
+    readonly DialogClose: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogClose']>
+    readonly DialogContent: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogContent']>
+    readonly DialogDescription: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogDescription']>
+    readonly DialogFooter: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogFooter']>
+    readonly DialogHeader: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogHeader']>
+    readonly DialogScrollContent: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogScrollContent']>
+    readonly DialogTitle: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogTitle']>
+    readonly DialogTrigger: UnwrapRef<typeof import('./components/ui/dialog/index')['DialogTrigger']>
+    readonly Drawer: UnwrapRef<typeof import('./components/ui/drawer/index')['Drawer']>
+    readonly DrawerClose: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerClose']>
+    readonly DrawerContent: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerContent']>
+    readonly DrawerDescription: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerDescription']>
+    readonly DrawerFooter: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerFooter']>
+    readonly DrawerHeader: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerHeader']>
+    readonly DrawerOverlay: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerOverlay']>
+    readonly DrawerPortal: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerPortal']>
+    readonly DrawerTitle: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerTitle']>
+    readonly DrawerTrigger: UnwrapRef<typeof import('./components/ui/drawer/index')['DrawerTrigger']>
+    readonly DropdownMenu: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenu']>
+    readonly DropdownMenuCheckboxItem: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuCheckboxItem']>
+    readonly DropdownMenuContent: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuContent']>
+    readonly DropdownMenuGroup: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuGroup']>
+    readonly DropdownMenuItem: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuItem']>
+    readonly DropdownMenuLabel: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuLabel']>
+    readonly DropdownMenuPortal: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuPortal']>
+    readonly DropdownMenuRadioGroup: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuRadioGroup']>
+    readonly DropdownMenuRadioItem: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuRadioItem']>
+    readonly DropdownMenuSeparator: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSeparator']>
+    readonly DropdownMenuShortcut: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuShortcut']>
+    readonly DropdownMenuSub: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSub']>
+    readonly DropdownMenuSubContent: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSubContent']>
+    readonly DropdownMenuSubTrigger: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuSubTrigger']>
+    readonly DropdownMenuTrigger: UnwrapRef<typeof import('./components/ui/dropdown-menu/index')['DropdownMenuTrigger']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly FORM_ITEM_INJECTION_KEY: UnwrapRef<typeof import('./components/ui/form/injectionKeys')['FORM_ITEM_INJECTION_KEY']>
+    readonly Form: UnwrapRef<typeof import('./components/ui/form/index')['Form']>
+    readonly FormControl: UnwrapRef<typeof import('./components/ui/form/index')['FormControl']>
+    readonly FormDescription: UnwrapRef<typeof import('./components/ui/form/index')['FormDescription']>
+    readonly FormField: UnwrapRef<typeof import('./components/ui/form/index')['FormField']>
+    readonly FormFieldArray: UnwrapRef<typeof import('./components/ui/form/index')['FormFieldArray']>
+    readonly FormItem: UnwrapRef<typeof import('./components/ui/form/index')['FormItem']>
+    readonly FormLabel: UnwrapRef<typeof import('./components/ui/form/index')['FormLabel']>
+    readonly FormMessage: UnwrapRef<typeof import('./components/ui/form/index')['FormMessage']>
+    readonly HoverCard: UnwrapRef<typeof import('./components/ui/hover-card/index')['HoverCard']>
+    readonly HoverCardContent: UnwrapRef<typeof import('./components/ui/hover-card/index')['HoverCardContent']>
+    readonly HoverCardTrigger: UnwrapRef<typeof import('./components/ui/hover-card/index')['HoverCardTrigger']>
+    readonly INPUT_COMPONENTS: UnwrapRef<typeof import('./components/ui/auto-form/constant')['INPUT_COMPONENTS']>
+    readonly Input: UnwrapRef<typeof import('./components/ui/input/index')['Input']>
     readonly InstanceStatus: UnwrapRef<typeof import('./types/components')['InstanceStatus']>
+    readonly Label: UnwrapRef<typeof import('./components/ui/label/index')['Label']>
+    readonly LineChart: UnwrapRef<typeof import('./components/ui/chart-line/index')['LineChart']>
     readonly NatType: UnwrapRef<typeof import('./types/components')['NatType']>
+    readonly Popover: UnwrapRef<typeof import('./components/ui/popover/index')['Popover']>
+    readonly PopoverAnchor: UnwrapRef<typeof import('./components/ui/popover/index')['PopoverAnchor']>
+    readonly PopoverContent: UnwrapRef<typeof import('./components/ui/popover/index')['PopoverContent']>
+    readonly PopoverTrigger: UnwrapRef<typeof import('./components/ui/popover/index')['PopoverTrigger']>
+    readonly RadioGroup: UnwrapRef<typeof import('./components/ui/radio-group/index')['RadioGroup']>
+    readonly RadioGroupItem: UnwrapRef<typeof import('./components/ui/radio-group/index')['RadioGroupItem']>
+    readonly ScrollArea: UnwrapRef<typeof import('./components/ui/scroll-area/index')['ScrollArea']>
+    readonly ScrollBar: UnwrapRef<typeof import('./components/ui/scroll-area/index')['ScrollBar']>
+    readonly Select: UnwrapRef<typeof import('./components/ui/select/index')['Select']>
+    readonly SelectContent: UnwrapRef<typeof import('./components/ui/select/index')['SelectContent']>
+    readonly SelectGroup: UnwrapRef<typeof import('./components/ui/select/index')['SelectGroup']>
+    readonly SelectItem: UnwrapRef<typeof import('./components/ui/select/index')['SelectItem']>
+    readonly SelectItemText: UnwrapRef<typeof import('./components/ui/select/index')['SelectItemText']>
+    readonly SelectLabel: UnwrapRef<typeof import('./components/ui/select/index')['SelectLabel']>
+    readonly SelectScrollDownButton: UnwrapRef<typeof import('./components/ui/select/index')['SelectScrollDownButton']>
+    readonly SelectScrollUpButton: UnwrapRef<typeof import('./components/ui/select/index')['SelectScrollUpButton']>
+    readonly SelectSeparator: UnwrapRef<typeof import('./components/ui/select/index')['SelectSeparator']>
+    readonly SelectTrigger: UnwrapRef<typeof import('./components/ui/select/index')['SelectTrigger']>
+    readonly SelectValue: UnwrapRef<typeof import('./components/ui/select/index')['SelectValue']>
+    readonly Separator: UnwrapRef<typeof import('./components/ui/separator/index')['Separator']>
+    readonly Switch: UnwrapRef<typeof import('./components/ui/switch/index')['Switch']>
+    readonly Table: UnwrapRef<typeof import('./components/ui/table/index')['Table']>
+    readonly TableBody: UnwrapRef<typeof import('./components/ui/table/index')['TableBody']>
+    readonly TableCaption: UnwrapRef<typeof import('./components/ui/table/index')['TableCaption']>
+    readonly TableCell: UnwrapRef<typeof import('./components/ui/table/index')['TableCell']>
+    readonly TableEmpty: UnwrapRef<typeof import('./components/ui/table/index')['TableEmpty']>
+    readonly TableFooter: UnwrapRef<typeof import('./components/ui/table/index')['TableFooter']>
+    readonly TableHead: UnwrapRef<typeof import('./components/ui/table/index')['TableHead']>
+    readonly TableHeader: UnwrapRef<typeof import('./components/ui/table/index')['TableHeader']>
+    readonly TableRow: UnwrapRef<typeof import('./components/ui/table/index')['TableRow']>
+    readonly Tabs: UnwrapRef<typeof import('./components/ui/tabs/index')['Tabs']>
+    readonly TabsContent: UnwrapRef<typeof import('./components/ui/tabs/index')['TabsContent']>
+    readonly TabsList: UnwrapRef<typeof import('./components/ui/tabs/index')['TabsList']>
+    readonly TabsTrigger: UnwrapRef<typeof import('./components/ui/tabs/index')['TabsTrigger']>
+    readonly TagsInput: UnwrapRef<typeof import('./components/ui/tags-input/index')['TagsInput']>
+    readonly TagsInputInput: UnwrapRef<typeof import('./components/ui/tags-input/index')['TagsInputInput']>
+    readonly TagsInputItem: UnwrapRef<typeof import('./components/ui/tags-input/index')['TagsInputItem']>
+    readonly TagsInputItemDelete: UnwrapRef<typeof import('./components/ui/tags-input/index')['TagsInputItemDelete']>
+    readonly TagsInputItemText: UnwrapRef<typeof import('./components/ui/tags-input/index')['TagsInputItemText']>
+    readonly Textarea: UnwrapRef<typeof import('./components/ui/textarea/index')['Textarea']>
+    readonly Toast: UnwrapRef<typeof import('./components/ui/toast/index')['Toast']>
+    readonly ToastAction: UnwrapRef<typeof import('./components/ui/toast/index')['ToastAction']>
+    readonly ToastClose: UnwrapRef<typeof import('./components/ui/toast/index')['ToastClose']>
+    readonly ToastDescription: UnwrapRef<typeof import('./components/ui/toast/index')['ToastDescription']>
+    readonly ToastProvider: UnwrapRef<typeof import('./components/ui/toast/index')['ToastProvider']>
+    readonly ToastTitle: UnwrapRef<typeof import('./components/ui/toast/index')['ToastTitle']>
+    readonly ToastViewport: UnwrapRef<typeof import('./components/ui/toast/index')['ToastViewport']>
+    readonly Toaster: UnwrapRef<typeof import('./components/ui/toast/index')['Toaster']>
+    readonly Tooltip: UnwrapRef<typeof import('./components/ui/tooltip/index')['Tooltip']>
+    readonly TooltipContent: UnwrapRef<typeof import('./components/ui/tooltip/index')['TooltipContent']>
+    readonly TooltipProvider: UnwrapRef<typeof import('./components/ui/tooltip/index')['TooltipProvider']>
+    readonly TooltipTrigger: UnwrapRef<typeof import('./components/ui/tooltip/index')['TooltipTrigger']>
     readonly TransitionFunc: UnwrapRef<typeof import('./types/components')['TransitionFunc']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly alertVariants: UnwrapRef<typeof import('./components/ui/alert/index')['alertVariants']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly badgeVariants: UnwrapRef<typeof import('./components/ui/badge/index')['badgeVariants']>
+    readonly beautifyObjectName: UnwrapRef<typeof import('./components/ui/auto-form/utils')['beautifyObjectName']>
+    readonly buttonVariants: UnwrapRef<typeof import('./components/ui/button/index')['buttonVariants']>
     readonly cn: UnwrapRef<typeof import('./lib/utils')['cn']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
@@ -395,27 +767,38 @@ declare module 'vue' {
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
+    readonly defaultColors: UnwrapRef<typeof import('./components/ui/chart/index')['defaultColors']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly dependencies: UnwrapRef<typeof import('./components/ui/auto-form/dependencies')['default']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
+    readonly easytierVersion: UnwrapRef<typeof import('./composables/instance')['easytierVersion']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly generateInstanceStrDefault: UnwrapRef<typeof import('./composables/mock')['generateInstanceStrDefault']>
     readonly generateRandomString: UnwrapRef<typeof import('./composables/utils')['generateRandomString']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getBaseSchema: UnwrapRef<typeof import('./components/ui/auto-form/utils')['getBaseSchema']>
+    readonly getBaseType: UnwrapRef<typeof import('./components/ui/auto-form/utils')['getBaseType']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDefaultValueInZodStack: UnwrapRef<typeof import('./components/ui/auto-form/utils')['getDefaultValueInZodStack']>
+    readonly getFromPath: UnwrapRef<typeof import('./components/ui/auto-form/utils')['getFromPath']>
+    readonly getIndexIfArray: UnwrapRef<typeof import('./components/ui/auto-form/utils')['getIndexIfArray']>
+    readonly getObjectFormSchema: UnwrapRef<typeof import('./components/ui/auto-form/utils')['getObjectFormSchema']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly humanStreamSize: UnwrapRef<typeof import('./composables/utils')['humanStreamSize']>
     readonly humanStreamSizeSplit: UnwrapRef<typeof import('./composables/utils')['humanStreamSizeSplit']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly injectDependencies: UnwrapRef<typeof import('./components/ui/auto-form/dependencies')['injectDependencies']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly instancesMock: UnwrapRef<typeof import('./composables/mock')['instancesMock']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isDev: UnwrapRef<typeof import('./composables/utils')['isDev']>
     readonly isMobile: UnwrapRef<typeof import('./composables/mobile')['isMobile']>
+    readonly isNotNestedPath: UnwrapRef<typeof import('./components/ui/auto-form/utils')['isNotNestedPath']>
     readonly isProd: UnwrapRef<typeof import('./composables/utils')['isProd']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -433,6 +816,7 @@ declare module 'vue' {
     readonly natTypeNum2Str: UnwrapRef<typeof import('./composables/utils')['natTypeNum2Str']>
     readonly natTypeStr2Num: UnwrapRef<typeof import('./composables/utils')['natTypeStr2Num']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
+    readonly normalizeFormPath: UnwrapRef<typeof import('./components/ui/auto-form/utils')['normalizeFormPath']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -458,6 +842,7 @@ declare module 'vue' {
     readonly pkg: UnwrapRef<typeof import('./composables/utils')['pkg']>
     readonly platformIsMobile: UnwrapRef<typeof import('./composables/mobile')['platformIsMobile']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
+    readonly provideDependencies: UnwrapRef<typeof import('./components/ui/auto-form/dependencies')['provideDependencies']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
@@ -494,6 +879,8 @@ declare module 'vue' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
+    readonly toast: UnwrapRef<typeof import('./components/ui/toast/use-toast')['toast']>
+    readonly toastVariants: UnwrapRef<typeof import('./components/ui/toast/index')['toastVariants']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>
@@ -568,6 +955,7 @@ declare module 'vue' {
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
+    readonly useFormField: UnwrapRef<typeof import('./components/ui/form/useFormField')['useFormField']>
     readonly useFps: UnwrapRef<typeof import('@vueuse/core')['useFps']>
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
@@ -655,6 +1043,7 @@ declare module 'vue' {
     readonly useTitle: UnwrapRef<typeof import('@vueuse/core')['useTitle']>
     readonly useToNumber: UnwrapRef<typeof import('@vueuse/core')['useToNumber']>
     readonly useToString: UnwrapRef<typeof import('@vueuse/core')['useToString']>
+    readonly useToast: UnwrapRef<typeof import('./components/ui/toast/use-toast')['useToast']>
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>

@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import type { InstancePeerDetail, InstancePeerStat } from '~/types/components'
+import type { InstanceChartStat, InstanceData, InstancePeerDetail, InstancePeerStat } from '~/types/components'
 
 const props = defineProps<PeerDetailProps>()
 const { t } = useI18n()
 const instanceStore = useInstanceStore()
-const { currentInstance, chartStatsData, statusUpTotal, statusDownTotal } = storeToRefs(instanceStore)
+const { statusUpTotal, statusDownTotal } = storeToRefs(instanceStore)
 interface PeerDetailProps {
   id: string
+  instance: InstanceData
+  chartStatsData: InstanceChartStat[]
+  local?: boolean
 }
 
 const detailStatsData = computed(() => {
-  const sliceStats = currentInstance.value?.stats ?? []
+  const sliceStats = props.instance.stats ?? []
   const peerDetail: InstancePeerDetail = {
     id: props.id,
     name: '',
@@ -43,6 +46,11 @@ const detailStatsData = computed(() => {
   return peerDetail
 })
 
+const version = computed(() => {
+  const v = props.local ? props.instance.version : detailStatsData.value.version
+  return `${v ? 'v' : ''}${v ?? 'unknown'}`
+})
+
 const currentStatsData = computed(() => {
   return detailStatsData.value.stats.at(-1)!
 })
@@ -58,20 +66,18 @@ const deviceConnStatus = computed(() => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger as-child>
-            <span class="font-semibold leading-none tracking-tight max-w-[150px] truncate">{{ detailStatsData.name
-            }}</span>
+            <span class="font-semibold leading-none tracking-tight max-w-[120px] truncate">{{ props.local ? props.instance.hostname : detailStatsData.name }}</span>
           </TooltipTrigger>
           <TooltipContent>
-            <p>{{ detailStatsData.name }}</p>
+            <p>{{ props.local ? props.instance.hostname : detailStatsData.name }}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <span class="text-xs text-gray-500 ml-2">{{ `${detailStatsData.version ? 'v' : ''}${detailStatsData.version
-        ?? 'unknown'}` }}</span>
+      <span class="text-xs text-gray-500 ml-2">{{ version }}</span>
     </div>
-    <div v-if="currentInstance?.status">
+    <div v-if="props.instance?.status">
       <Badge v-if="!currentStatsData.server" class="!bg-primary/85 mr-2 mt-2">
-        {{ `IP: ${currentStatsData.ipv4 || '-'}` }}
+        {{ `IP: ${(props.local ? props.instance.ipv4 : currentStatsData.ipv4) || 'N/A'}` }}
       </Badge>
       <Badge variant="secondary" class="mr-2 mt-2">
         {{ deviceConnStatus }}
@@ -141,13 +147,13 @@ const deviceConnStatus = computed(() => {
       </HoverCard>
     </div>
     <div
-      v-if="currentInstance && currentInstance.stats.length > 0 && chartStatsData?.length && currentStatsData.cost === 0"
+      v-if="props.instance && props.instance.stats.length > 0 && chartStatsData?.length && props.local"
       class="flex flex-wrap"
     >
       <HoverCard>
         <HoverCardTrigger as-child>
           <Badge variant="outline" class="mr-2 mt-2">
-            <NumberAnimation :to="chartStatsData.at(-1)?.total" prefix="设备数: " />
+            <NumberAnimation :to="chartStatsData.at(-1)?.total" :prefix="`${t('component.instance.peerDetail.deviceNum')}: `" />
           </Badge>
         </HoverCardTrigger>
         <HoverCardContent class="!p-0">

@@ -29,3 +29,13 @@ export async function stopNetworkInstance(id: string) {
     // TODO: web env
   }
 }
+
+export async function easytierVersion() {
+  if (isTauri) {
+    const { invoke } = await import('@tauri-apps/api/core')
+    return invoke<string>('easytier_version')
+  }
+  else {
+    // TODO: web env
+  }
+}

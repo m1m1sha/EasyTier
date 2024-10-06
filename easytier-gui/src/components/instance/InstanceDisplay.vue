@@ -10,7 +10,6 @@ const { selectedId, currentInstance, instances } = storeToRefs(instanceStore)
 const instanceStatus = computed(() => currentInstance.value?.status)
 
 async function toggleStatus(id: string) {
-  // console.log(instanceStatus.value ? 'top' : 'start', currentInstance.value!.config.str)
   const curInstance = instances.value.find(i => i.id === id)
   if (curInstance?.status) {
     await stopNetworkInstance(id)
@@ -18,6 +17,11 @@ async function toggleStatus(id: string) {
   else {
     const toml = parse(curInstance!.config.str)
     toml.instance_id = id
+    instances.value.forEach((i) => {
+      if (i.id === id) {
+        i.stats = []
+      }
+    })
     await startNetworkInstance(stringify(toml))
   }
 }

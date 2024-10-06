@@ -1,6 +1,6 @@
 {
   "productName": "easytier-gui",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "identifier": "com.kkrainbow.easytier",
   "build": {
     "beforeDevCommand": "pnpm run dev",

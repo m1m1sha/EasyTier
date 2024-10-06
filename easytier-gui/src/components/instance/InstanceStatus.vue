@@ -1,31 +1,26 @@
 <script setup lang="ts">
 import { ArrowUpDown, PlaneTakeoff, Radar, Users } from 'lucide-vue-next'
 import { natTypeNum2Str } from '~/composables/utils'
-// import type { InstancePeer } from '~/types/components'
+import type { InstanceChartStat } from '~/types/components'
 
 const { t } = useI18n()
 const instanceStore = useInstanceStore()
-const { currentInstance, chartStatsData, statusIpv4, statusUpTotal, statusDownTotal, currentPeers } = storeToRefs(instanceStore)
+const { currentInstance, selectedId, statusIpv4, statusUpTotal, statusDownTotal, currentPeers } = storeToRefs(instanceStore)
 
 const peerList = computed(() => {
-  // const local: InstancePeer = {
-  //   ipv4: currentInstance.value?.ipv4,
-  //   name: currentInstance.value?.hostname || 'Local',
-  //   id: currentInstance.value?.id ?? '',
-  //   server: false,
-  //   relay: false,
-  //   cost: 0,
-  //   up: 0,
-  //   down: 0,
-  //   lost: 0,
-  //   latency: 0,
-  // }
-  return [...currentPeers.value!.sort((a, b) => a.server && !b.server ? -1 : 1) ?? []]
+  return currentPeers.value!.sort((a, b) => a.server && !b.server ? -1 : 1)
 })
+
+const chartStatsData = computed(() => (currentInstance.value?.stats.slice(-15) ?? []).map(item => ({
+  time: item.time,
+  total: item.peers.length,
+  up: item.peers.reduce((a, c) => a + c.up, 0),
+  down: item.peers.reduce((a, c) => a + c.down, 0),
+} as InstanceChartStat)) ?? [])
 </script>
 
 <template>
-  <Tabs default-value="overview" style="height: calc(100% - 46px);">
+  <Tabs default-value="overview" style="height: calc(100% - 44px);">
     <TabsList>
       <TabsTrigger value="overview">
         {{ t('component.instance.status.overview.title') }}
@@ -37,7 +32,7 @@ const peerList = computed(() => {
         {{ t('component.instance.status.config') }}
       </TabsTrigger>
     </TabsList>
-    <TabsContent value="overview" class="h-full overflow-y-scroll">
+    <TabsContent value="overview" style="height: calc(100% - 44px);" class="h-full overflow-y-scroll">
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pr-px">
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -120,15 +115,16 @@ const peerList = computed(() => {
         </Card>
       </div>
     </TabsContent>
-    <TabsContent value="detail" class="h-full overflow-y-scroll">
+    <TabsContent value="detail" style="height: calc(100% - 44px);" class="h-full overflow-y-scroll">
       <div
         v-if="currentInstance" name="list" appear
         class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pr-px"
       >
-        <PeerDetail v-for="peer in peerList" :id="peer.id" :key="peer.id" />
-      </div>
-      <div v-else class="w-full h-full flex text-center justify-center items-center align-middle">
-        <span>{{ t('component.instance.status.detail.noData') }}</span>
+        <PeerDetail :id="selectedId" local :instance="currentInstance" :chart-stats-data />
+        <PeerDetail
+          v-for="peer in peerList" :id="peer.id" :key="peer.id" :instance="currentInstance"
+          :chart-stats-data
+        />
       </div>
     </TabsContent>
     <TabsContent value="config" style="height: calc(100% - 44px);" class="overflow-hidden pr-px">
