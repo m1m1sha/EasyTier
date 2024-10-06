@@ -10,15 +10,20 @@ onBeforeMount(async () => {
 <template>
   <div class="pb-2 space-y-2">
     <div class="space-y-2 text-center">
-      <div class="space-x-2">
-        <span class="text-xl font-medium">EasyTier</span>
-        <Badge class="space-x-2">
-          GUI: {{ `v${pkg.version}` }}
-        </Badge>
-        <Badge variant="secondary" class="space-x-2">
-          Core: {{ `v${etVersion}` }}
-        </Badge>
+      <div class="space-x-2 py-6">
+        <div class="text-3xl font-bold">
+          EasyTier
+        </div>
+        <div class="space-x-2">
+          <Badge class="space-x-2 font-normal text-xs px-1.5 py-0.5">
+            Gui: {{ `v${pkg.version}` }}
+          </Badge>
+          <Badge variant="secondary" class="space-x-2 font-normal text-xs px-1.5 py-0.5">
+            Core: {{ `v${etVersion}` }}
+          </Badge>
+        </div>
       </div>
+      <Separator />
       <p class="text-sm text-muted-foreground">
         {{ t('component.about.description') }}
       </p>
@@ -28,7 +33,6 @@ onBeforeMount(async () => {
         <Image src="https://img.shields.io/github/last-commit/EasyTier/EasyTier" alt="badge" />
       </div>
     </div>
-    <Separator />
   </div>
 </template>
 
