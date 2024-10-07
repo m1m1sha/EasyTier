@@ -49,3 +49,13 @@ export async function isAutostart() {
     // TODO: web env
   }
 }
+
+export async function setTunFd(instanceId: string, fd: number) {
+  if (isTauri) {
+    const { invoke } = await import('@tauri-apps/api/core')
+    return await invoke('set_tun_fd', { instanceId, fd })
+  }
+  else {
+    // TODO: web env
+  }
+}

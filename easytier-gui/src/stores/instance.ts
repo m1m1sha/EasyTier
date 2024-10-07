@@ -5,7 +5,7 @@ export const useInstanceStore = defineStore('instanceStore', () => {
   const instances = ref<InstanceData[]>(isDev ? instancesMock() : [])
   const selectedId = ref('')
 
-  const currentInstance = computed(() => instances.value.find(instance => instance.id === selectedId.value) || undefined)
+  const currentInstance = computed<InstanceData | undefined>(() => instances.value.find(instance => instance.id === selectedId.value) || undefined)
 
   const statusIpv4 = computed(() => {
     return currentInstance.value?.ipv4 ?? 'N/A'
@@ -38,7 +38,7 @@ export const useInstanceStore = defineStore('instanceStore', () => {
             i.stats = []
           }
         })
-
+        await prepareVpnService()
         await startNetworkInstance(stringify(toml))
       }
     }

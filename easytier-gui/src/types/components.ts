@@ -36,6 +36,7 @@ export interface InstanceData {
   config: InstanceConfig
   events: string[]
   prps: PeerRoutePair[]
+  err?: string
   status: boolean
   stats: InstanceTimePeer[]
 }
@@ -50,6 +51,7 @@ export interface InstanceInstantData {
   tcpNatType?: number
   events: string[]
   prps: PeerRoutePair[]
+  err?: string
   status: boolean
   stat: InstanceTimePeer
 }

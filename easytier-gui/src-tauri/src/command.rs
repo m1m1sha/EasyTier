@@ -103,6 +103,7 @@ pub struct InstanceInstantData {
     tcp_nat_type: i32,
     events: Vec<(DateTime<Local>, GlobalCtxEvent)>,
     prps: Vec<PeerRoutePair>,
+    err: Option<String>,
     status: bool,
     stat: InstanceTimePeer,
 }
@@ -189,6 +190,7 @@ pub async fn run_network_instance(app: AppHandle, cfg: String) -> Result<(), Str
                             udp_nat_type: info.my_node_info.stun_info.udp_nat_type,
                             tcp_nat_type: info.my_node_info.stun_info.tcp_nat_type,
                             prps: info.peer_route_pairs.clone(),
+                            err: info.error_msg.clone(),
                             stat: InstanceTimePeer { time: now, peers },
                         });
                     }

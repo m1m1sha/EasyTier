@@ -15,6 +15,8 @@ onBeforeMount(async () => {
       description: h('div', { class: 'whitespace-pre-wrap', innerHTML: e }),
     })
   }
+
+  await initMobileVpnService()
 })
 
 onUnmounted(async () => {

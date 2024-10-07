@@ -75,6 +75,7 @@ async function listenInstanceInfo() {
         instance.tcpNatType = instantData.tcpNatType
         instance.events = instantData.events || []
         instance.prps = instantData.prps
+        instance.err = instantData.err
         if (instance.stats.length >= 59)
           instance.stats.shift()
         instance.stats.push(instantData.stat)
