@@ -71,3 +71,8 @@ form:
     network_name: 组网名称
     network_secret: 组网密钥
     submit: 保存
+
+toast:
+  error:
+    operateInstance: 操作实例失败
+    parseInstanceConfig: 解析实例配置失败

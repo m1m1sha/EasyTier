@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { useToast } from '~/components/ui/toast/use-toast'
+
+const { toast } = useToast()
+const { t } = useI18n()
 onBeforeMount(async () => {
   await listen()
-  await checkAutostart()
+  try {
+    await checkAutostart()
+  }
+  catch (e) {
+    toast({
+      title: t('toast.error.operateInstance'),
+      variant: 'destructive',
+      description: h('div', { class: 'whitespace-pre-wrap', innerHTML: e }),
+    })
+  }
 })
 
 onUnmounted(async () => {

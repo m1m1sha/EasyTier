@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { BookA, ChevronLeft, FileClock, MoreVertical, Share2, Trash2 } from 'lucide-vue-next'
+import { useToast } from '~/components/ui/toast/use-toast'
 
+const { toast } = useToast()
 const { t } = useI18n()
 const instanceStore = useInstanceStore()
 const appStore = useAppStore()
@@ -11,6 +13,19 @@ const instanceStatus = computed(() => currentInstance.value?.status)
 function back() {
   if (isMobile.value)
     instanceStore.setSelectedId('')
+}
+
+async function toggleStatus(id: string) {
+  try {
+    instanceStore.toggleInstanceStatus(id)
+  }
+  catch (e) {
+    toast({
+      title: t('toast.error.operateInstance'),
+      variant: 'destructive',
+      description: h('div', { class: 'whitespace-pre-wrap', innerHTML: e }),
+    })
+  }
 }
 </script>
 
@@ -30,7 +45,7 @@ function back() {
           </Tooltip>
         </div>
         <div class="flex items-center">
-          <Switch :checked="instanceStatus" @update:checked="instanceStore.toggleInstanceStatus(selectedId)" />
+          <Switch :checked="instanceStatus" @update:checked="toggleStatus(selectedId)" />
           <Separator orientation="vertical" class="mx-2 h-6" />
           <DropdownMenu>
             <DropdownMenuTrigger as-child>

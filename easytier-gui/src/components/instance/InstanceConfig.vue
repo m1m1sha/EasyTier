@@ -5,6 +5,7 @@ import { useToast } from '~/components/ui/toast/use-toast'
 const instanceStore = useInstanceStore()
 const { currentInstance } = storeToRefs(instanceStore)
 const { toast } = useToast()
+const { t } = useI18n()
 const configStr = computed({
   get() {
     const toml = parse(currentInstance.value!.config.str)
@@ -21,7 +22,7 @@ const configStr = computed({
     }
     catch (e: any) {
       toast({
-        title: 'Instance Config',
+        title: t('toast.error.parseInstanceConfig'),
         variant: 'destructive',
         description: h('div', { class: 'whitespace-pre-wrap', innerHTML: e }),
       })

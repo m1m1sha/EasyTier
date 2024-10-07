@@ -77,6 +77,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.13)
+      tauri-plugin-vpnservice-api:
+        specifier: link:../tauri-plugin-vpnservice
+        version: link:../tauri-plugin-vpnservice
       uuid:
         specifier: 11.0.0-0
         version: 11.0.0-0

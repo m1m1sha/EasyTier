@@ -251,6 +251,7 @@ declare global {
   const humanStreamSize: typeof import('./composables/utils')['humanStreamSize']
   const humanStreamSizeSplit: typeof import('./composables/utils')['humanStreamSizeSplit']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const initMobileVpnService: typeof import('./composables/mobileVpn')['initMobileVpnService']
   const inject: typeof import('vue')['inject']
   const injectDependencies: typeof import('./components/ui/auto-form/dependencies')['injectDependencies']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
@@ -305,6 +306,7 @@ declare global {
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const pkg: typeof import('./composables/utils')['pkg']
   const platformIsMobile: typeof import('./composables/mobile')['platformIsMobile']
+  const prepareVpnService: typeof import('./composables/mobileVpn')['prepareVpnService']
   const provide: typeof import('vue')['provide']
   const provideDependencies: typeof import('./components/ui/auto-form/dependencies')['provideDependencies']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
@@ -326,6 +328,7 @@ declare global {
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
+  const setTunFd: typeof import('./composables/instance')['setTunFd']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -796,6 +799,7 @@ declare module 'vue' {
     readonly humanStreamSize: UnwrapRef<typeof import('./composables/utils')['humanStreamSize']>
     readonly humanStreamSizeSplit: UnwrapRef<typeof import('./composables/utils')['humanStreamSizeSplit']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initMobileVpnService: UnwrapRef<typeof import('./composables/mobileVpn')['initMobileVpnService']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectDependencies: UnwrapRef<typeof import('./components/ui/auto-form/dependencies')['injectDependencies']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
@@ -847,6 +851,7 @@ declare module 'vue' {
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly pkg: UnwrapRef<typeof import('./composables/utils')['pkg']>
     readonly platformIsMobile: UnwrapRef<typeof import('./composables/mobile')['platformIsMobile']>
+    readonly prepareVpnService: UnwrapRef<typeof import('./composables/mobileVpn')['prepareVpnService']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideDependencies: UnwrapRef<typeof import('./components/ui/auto-form/dependencies')['provideDependencies']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
@@ -868,6 +873,7 @@ declare module 'vue' {
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
+    readonly setTunFd: UnwrapRef<typeof import('./composables/instance')['setTunFd']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>

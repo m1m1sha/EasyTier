@@ -38,6 +38,7 @@ export const useInstanceStore = defineStore('instanceStore', () => {
             i.stats = []
           }
         })
+
         await startNetworkInstance(stringify(toml))
       }
     }
