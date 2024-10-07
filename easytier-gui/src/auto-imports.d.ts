@@ -191,6 +191,7 @@ declare global {
   const addInstanceWithConfig: typeof import('./composables/mock')['addInstanceWithConfig']
   const addInstanceWithDefaultConfig: typeof import('./composables/mock')['addInstanceWithDefaultConfig']
   const alertVariants: typeof import('./components/ui/alert/index')['alertVariants']
+  const appAutostartSchema: typeof import('./composables/config')['appAutostartSchema']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const badgeVariants: typeof import('./components/ui/badge/index')['badgeVariants']
@@ -736,6 +737,7 @@ declare module 'vue' {
     readonly TransitionFunc: UnwrapRef<typeof import('./types/components')['TransitionFunc']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly alertVariants: UnwrapRef<typeof import('./components/ui/alert/index')['alertVariants']>
+    readonly appAutostartSchema: UnwrapRef<typeof import('./composables/config')['appAutostartSchema']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly badgeVariants: UnwrapRef<typeof import('./components/ui/badge/index')['badgeVariants']>

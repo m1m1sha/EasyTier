@@ -3,11 +3,23 @@ export const useAppStore = defineStore('appStore', () => {
   const addInstanceFromFileDrawerVisible = ref(false)
 
   const appCloseConfirmDialogVisible = ref(false)
+  const appAutostartDialogVisible = ref(false)
+
+  const autostart = ref<{
+    id: string
+    start: boolean
+  }>({
+    id: '',
+    start: false,
+  })
 
   return {
     addInstanceDialogVisible,
     addInstanceFromFileDrawerVisible,
     appCloseConfirmDialogVisible,
+    appAutostartDialogVisible,
+
+    autostart,
 
     setAddInstanceDialogVisible(visible: boolean) {
       addInstanceDialogVisible.value = visible
@@ -18,11 +30,23 @@ export const useAppStore = defineStore('appStore', () => {
     hideAllDialog() {
       appCloseConfirmDialogVisible.value = false
       addInstanceDialogVisible.value = false
+      appAutostartDialogVisible.value = false
     },
     setAppCloseConfirmDialogVisible(visible: boolean) {
       appCloseConfirmDialogVisible.value = visible
     },
+    setAppAutostartDialogVisible(visible: boolean) {
+      appAutostartDialogVisible.value = visible
+    },
+    setAutostart(value: boolean) {
+      autostart.value.start = value
+    },
+    addAutostartId(id: string = '') {
+      autostart.value.id = id
+    },
   }
+}, {
+  persist: true,
 })
 
 if (import.meta.hot)

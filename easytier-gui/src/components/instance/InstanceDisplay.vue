@@ -1,30 +1,13 @@
 <script setup lang="ts">
-import { ChevronLeft, FileClock, MoreVertical, Share2, Trash2 } from 'lucide-vue-next'
-import { parse, stringify } from 'smol-toml'
-import { startNetworkInstance, stopNetworkInstance } from '~/composables/instance'
+import { BookA, ChevronLeft, FileClock, MoreVertical, Share2, Trash2 } from 'lucide-vue-next'
 
 const { t } = useI18n()
 const instanceStore = useInstanceStore()
-const { selectedId, currentInstance, instances } = storeToRefs(instanceStore)
+const appStore = useAppStore()
+const { selectedId, currentInstance } = storeToRefs(instanceStore)
 
 const instanceStatus = computed(() => currentInstance.value?.status)
 
-async function toggleStatus(id: string) {
-  const curInstance = instances.value.find(i => i.id === id)
-  if (curInstance?.status) {
-    await stopNetworkInstance(id)
-  }
-  else {
-    const toml = parse(curInstance!.config.str)
-    toml.instance_id = id
-    instances.value.forEach((i) => {
-      if (i.id === id) {
-        i.stats = []
-      }
-    })
-    await startNetworkInstance(stringify(toml))
-  }
-}
 function back() {
   if (isMobile.value)
     instanceStore.setSelectedId('')
@@ -47,7 +30,7 @@ function back() {
           </Tooltip>
         </div>
         <div class="flex items-center">
-          <Switch :checked="instanceStatus" @update:checked="toggleStatus(selectedId)" />
+          <Switch :checked="instanceStatus" @update:checked="instanceStore.toggleInstanceStatus(selectedId)" />
           <Separator orientation="vertical" class="mx-2 h-6" />
           <DropdownMenu>
             <DropdownMenuTrigger as-child>
@@ -63,6 +46,9 @@ function back() {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Share2 class="mr-2 h-4 w-4" />{{ t('component.instance.display.share') }}
+              </DropdownMenuItem>
+              <DropdownMenuItem v-if="isTauri && !platformIsMobile" @click="appStore.setAppAutostartDialogVisible(true)">
+                <BookA class="mr-2 h-4 w-4" />{{ t('component.instance.display.autostart') }}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem @click="instanceStore.deleteInstance(selectedId)">

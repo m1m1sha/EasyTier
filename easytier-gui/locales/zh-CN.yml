@@ -14,6 +14,11 @@ component:
       content: 退出将关闭所有实例。 如需要最小化请点击最小化按钮！
       confirm: 确认
       cancel: 取消
+    appAutostart:
+      title: 开机自启动配置
+      switch: 自启动
+      selectPlaceholder: 选择自启动后自动启用的实例
+      instance: 实例
   drawerList:
     dropFile:
       title: 松开以添加实例配置
@@ -24,6 +29,7 @@ component:
       instanceAction: 实例操作
       log: 日志
       share: 分享
+      autostart: 自启动
       delete: 删除
     status:
       overview:
