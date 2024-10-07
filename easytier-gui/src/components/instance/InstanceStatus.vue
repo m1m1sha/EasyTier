@@ -8,7 +8,8 @@ const instanceStore = useInstanceStore()
 const { currentInstance, selectedId, statusIpv4, statusUpTotal, statusDownTotal, currentPeers } = storeToRefs(instanceStore)
 
 const peerList = computed(() => {
-  return currentPeers.value!.sort((a, b) => a.server && !b.server ? -1 : 1)
+  const peers = currentPeers.value
+  return peers.sort((a, b) => a.server && !b.server ? -1 : 1) || []
 })
 
 const chartStatsData = computed(() => (currentInstance.value?.stats.slice(-15) ?? []).map(item => ({

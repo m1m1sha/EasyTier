@@ -327,6 +327,7 @@ declare global {
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const setActivePinia: typeof import('pinia')['setActivePinia']
+  const setLogLevel: typeof import('./composables/instance')['setLogLevel']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const setTunFd: typeof import('./composables/instance')['setTunFd']
   const shallowReactive: typeof import('vue')['shallowReactive']
@@ -872,6 +873,7 @@ declare module 'vue' {
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
+    readonly setLogLevel: UnwrapRef<typeof import('./composables/instance')['setLogLevel']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly setTunFd: UnwrapRef<typeof import('./composables/instance')['setTunFd']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>

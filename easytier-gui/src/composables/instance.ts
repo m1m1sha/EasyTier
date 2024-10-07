@@ -53,7 +53,17 @@ export async function isAutostart() {
 export async function setTunFd(instanceId: string, fd: number) {
   if (isTauri) {
     const { invoke } = await import('@tauri-apps/api/core')
-    return await invoke('set_tun_fd', { instanceId, fd })
+    return await invoke<null>('set_tun_fd', { instanceId, fd })
+  }
+  else {
+    // TODO: web env
+  }
+}
+
+export async function setLogLevel(level: 'off' | 'warn' | 'info' | 'debug' | 'trace' = 'off') {
+  if (isTauri) {
+    const { invoke } = await import('@tauri-apps/api/core')
+    return await invoke<null>('set_logging_level', { level })
   }
   else {
     // TODO: web env

@@ -13,6 +13,16 @@ export const useAppStore = defineStore('appStore', () => {
     start: false,
   })
 
+  const logLevel = ref<'off' | 'warn' | 'info' | 'debug' | 'trace'>('off')
+
+  watch(
+    logLevel,
+    async (level) => {
+      await setLogLevel(level)
+    },
+    { deep: true },
+  )
+
   return {
     addInstanceDialogVisible,
     addInstanceFromFileDrawerVisible,
@@ -20,6 +30,7 @@ export const useAppStore = defineStore('appStore', () => {
     appAutostartDialogVisible,
 
     autostart,
+    logLevel,
 
     setAddInstanceDialogVisible(visible: boolean) {
       addInstanceDialogVisible.value = visible

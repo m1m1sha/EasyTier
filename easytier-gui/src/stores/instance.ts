@@ -1,5 +1,5 @@
 import { parse, stringify } from 'smol-toml'
-import type { InstanceData } from '~/types/components'
+import type { InstanceData, InstancePeer } from '~/types/components'
 
 export const useInstanceStore = defineStore('instanceStore', () => {
   const instances = ref<InstanceData[]>(isDev ? instancesMock() : [])
@@ -19,8 +19,8 @@ export const useInstanceStore = defineStore('instanceStore', () => {
     return humanStreamSizeSplit(currentInstance.value?.stats.at(-1)?.peers.reduce((a, c) => a + c.down, 0))
   })
 
-  const currentPeers = computed(() => {
-    return currentInstance.value?.stats.at(-1)?.peers
+  const currentPeers = computed<InstancePeer[]>(() => {
+    return currentInstance.value?.stats.at(-1)?.peers || []
   })
 
   async function toggleInstanceStatus(id: string) {

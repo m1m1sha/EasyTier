@@ -2,8 +2,6 @@ import { addPluginListener } from '@tauri-apps/api/core'
 import { prepare_vpn, start_vpn, stop_vpn } from 'tauri-plugin-vpnservice-api'
 import type { Route } from '~/types/components'
 
-const instanceStore = useInstanceStore()
-const { instances, currentInstance } = storeToRefs(instanceStore)
 interface vpnStatus {
   running: boolean
   ipv4Addr: string | null | undefined
@@ -110,6 +108,8 @@ function getRoutesForVpn(routes: Route[]): string[] {
 }
 
 async function onNetworkInstanceChange() {
+  const instanceStore = useInstanceStore()
+  const { instances, currentInstance } = storeToRefs(instanceStore)
   const virtual_ip = currentInstance.value?.ipv4
 
   if (!instances.value.map(i => i.id) || !currentInstance.value || currentInstance.value.err?.length || !virtual_ip) {
@@ -141,6 +141,7 @@ async function onNetworkInstanceChange() {
 }
 
 async function watchNetworkInstance() {
+  const instanceStore = useInstanceStore()
   let subscribe_running = false
   instanceStore.$subscribe(async () => {
     if (subscribe_running) {

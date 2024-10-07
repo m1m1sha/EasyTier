@@ -3,6 +3,8 @@ import { useToast } from '~/components/ui/toast/use-toast'
 
 const { toast } = useToast()
 const { t } = useI18n()
+const appStore = useAppStore()
+const { logLevel } = storeToRefs(appStore)
 onBeforeMount(async () => {
   await listen()
   try {
@@ -17,6 +19,7 @@ onBeforeMount(async () => {
   }
 
   await initMobileVpnService()
+  await setLogLevel(logLevel.value)
 })
 
 onUnmounted(async () => {
