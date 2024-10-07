@@ -197,6 +197,7 @@ declare global {
   const badgeVariants: typeof import('./components/ui/badge/index')['badgeVariants']
   const beautifyObjectName: typeof import('./components/ui/auto-form/utils')['beautifyObjectName']
   const buttonVariants: typeof import('./components/ui/button/index')['buttonVariants']
+  const checkAutostart: typeof import('./composables/autostart')['checkAutostart']
   const cn: typeof import('./lib/utils')['cn']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
@@ -254,6 +255,7 @@ declare global {
   const injectDependencies: typeof import('./components/ui/auto-form/dependencies')['injectDependencies']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const instancesMock: typeof import('./composables/mock')['instancesMock']
+  const isAutostart: typeof import('./composables/instance')['isAutostart']
   const isDefined: typeof import('@vueuse/core')['isDefined']
   const isDev: typeof import('./composables/utils')['isDev']
   const isMobile: typeof import('./composables/mobile')['isMobile']
@@ -743,6 +745,7 @@ declare module 'vue' {
     readonly badgeVariants: UnwrapRef<typeof import('./components/ui/badge/index')['badgeVariants']>
     readonly beautifyObjectName: UnwrapRef<typeof import('./components/ui/auto-form/utils')['beautifyObjectName']>
     readonly buttonVariants: UnwrapRef<typeof import('./components/ui/button/index')['buttonVariants']>
+    readonly checkAutostart: UnwrapRef<typeof import('./composables/autostart')['checkAutostart']>
     readonly cn: UnwrapRef<typeof import('./lib/utils')['cn']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
@@ -797,6 +800,7 @@ declare module 'vue' {
     readonly injectDependencies: UnwrapRef<typeof import('./components/ui/auto-form/dependencies')['injectDependencies']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly instancesMock: UnwrapRef<typeof import('./composables/mock')['instancesMock']>
+    readonly isAutostart: UnwrapRef<typeof import('./composables/instance')['isAutostart']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isDev: UnwrapRef<typeof import('./composables/utils')['isDev']>
     readonly isMobile: UnwrapRef<typeof import('./composables/mobile')['isMobile']>

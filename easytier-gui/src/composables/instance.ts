@@ -39,3 +39,13 @@ export async function easytierVersion() {
     // TODO: web env
   }
 }
+
+export async function isAutostart() {
+  if (isTauri) {
+    const { invoke } = await import('@tauri-apps/api/core')
+    return invoke<boolean>('is_autostart')
+  }
+  else {
+    // TODO: web env
+  }
+}

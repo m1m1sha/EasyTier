@@ -63,6 +63,11 @@ export const useInstanceStore = defineStore('instanceStore', () => {
     deleteInstance(id: string) {
       // stop instance
       instances.value = instances.value.filter(instance => instance.id !== id)
+      const appStore = useAppStore()
+      const { autostart } = storeToRefs(appStore)
+      if (autostart.value.id === id) {
+        autostart.value.id = ''
+      }
       if (selectedId.value === id)
         selectedId.value = ''
     },

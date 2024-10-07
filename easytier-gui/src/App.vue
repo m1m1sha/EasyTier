@@ -1,6 +1,7 @@
 <script setup lang="ts">
 onBeforeMount(async () => {
   await listen()
+  await checkAutostart()
 })
 
 onUnmounted(async () => {

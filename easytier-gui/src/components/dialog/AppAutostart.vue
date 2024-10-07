@@ -28,6 +28,9 @@ function toggleAutostart(payload: boolean) {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
+                  <SelectItem value="''">
+                    不自动启用实例
+                  </SelectItem>
                   <SelectLabel>{{ t('component.dialogList.appAutostart.instance') }}</SelectLabel>
                   <SelectItem v-for="instance in instances" :key="instance.id" :value="instance.id">
                     {{ instance.name }}

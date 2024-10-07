@@ -44,7 +44,7 @@ function back() {
               <DropdownMenuItem>
                 <FileClock class="mr-2 h-4 w-4" />{{ t('component.instance.display.log') }}
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem v-show="false">
                 <Share2 class="mr-2 h-4 w-4" />{{ t('component.instance.display.share') }}
               </DropdownMenuItem>
               <DropdownMenuItem v-if="isTauri && !platformIsMobile" @click="appStore.setAppAutostartDialogVisible(true)">
