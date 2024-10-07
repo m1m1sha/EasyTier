@@ -13,10 +13,10 @@ use constant::*;
 use tauri::Emitter;
 use tauri::Manager as _;
 
-#[cfg(not(target_os = "android"))]
+#[cfg(not(mobile))]
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
 
-#[cfg(not(target_os = "android"))]
+#[cfg(not(mobile))]
 fn toggle_window_visibility<R: tauri::Runtime>(app: &tauri::AppHandle<R>) {
     if let Some(window) = app.get_webview_window("main") {
         if window.is_visible().unwrap_or_default() {
@@ -28,7 +28,7 @@ fn toggle_window_visibility<R: tauri::Runtime>(app: &tauri::AppHandle<R>) {
     }
 }
 
-#[cfg(not(target_os = "android"))]
+#[cfg(not(mobile))]
 fn check_sudo() -> bool {
     use std::env::current_exe;
     let is_elevated = privilege::user::privileged();
@@ -104,7 +104,8 @@ pub fn run() {
 
             // for tray icon, menu need to be built in js
             #[cfg(not(mobile))]
-            let _tray_menu = TrayIconBuilder::with_id("main")
+            {
+                let _tray_menu = TrayIconBuilder::with_id("main")
                 .menu_on_left_click(false)
                 .on_tray_icon_event(|tray, event| {
                     if let TrayIconEvent::Click {
@@ -122,6 +123,7 @@ pub fn run() {
                 ))?)
                 .icon_as_template(false)
                 .build(app)?;
+            }
 
             Ok(())
         })

@@ -6,22 +6,24 @@ const { appCloseConfirmDialogVisible } = storeToRefs(appStore)
 </script>
 
 <template>
-  <AlertDialog v-model:open="appCloseConfirmDialogVisible">
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>{{ t('component.dialogList.appCloseConfirm.title') }}</AlertDialogTitle>
-        <AlertDialogDescription>
+  <Dialog v-model:open="appCloseConfirmDialogVisible">
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>{{ t('component.dialogList.appCloseConfirm.title') }}</DialogTitle>
+        <DialogDescription class="pt-4">
           {{ t('component.dialogList.appCloseConfirm.content') }}
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel @click="tauriCloseWindow()">
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter class="">
+        <Button variant="outline" @click="tauriCloseWindow()">
           {{ t('component.dialogList.appCloseConfirm.confirm') }}
-        </AlertDialogCancel>
-        <AlertDialogAction>{{ t('component.dialogList.appCloseConfirm.cancel') }}</AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
+        </Button>
+        <Button @click="tauriMinimizeWindow()">
+          {{ t('component.dialogList.appCloseConfirm.minimize') }}
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 </template>
 
 <style scoped lang="postcss"></style>

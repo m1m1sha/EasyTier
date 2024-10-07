@@ -20,6 +20,10 @@ onBeforeMount(async () => {
 
   await initMobileVpnService()
   await setLogLevel(logLevel.value)
+  setTimeout(async () => {
+    await setTrayMenu()
+  }, 1000)
+  appStore.hideAllDialog()
 })
 
 onUnmounted(async () => {

@@ -14,6 +14,7 @@ component:
       content: 退出将关闭所有实例。 如需要最小化请点击最小化按钮！
       confirm: 确认
       cancel: 取消
+      minimize: 最小化
     appAutostart:
       title: 开机自启动配置
       switch: 自启动
@@ -84,3 +85,6 @@ toast:
   error:
     operateInstance: 操作实例失败
     parseInstanceConfig: 解析实例配置失败
+
+tray:
+  exit: 退出

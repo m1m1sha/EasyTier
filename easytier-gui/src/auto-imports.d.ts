@@ -329,6 +329,9 @@ declare global {
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setLogLevel: typeof import('./composables/instance')['setLogLevel']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
+  const setTrayMenu: typeof import('./composables/tray')['setTrayMenu']
+  const setTrayRunState: typeof import('./composables/tray')['setTrayRunState']
+  const setTrayTooltip: typeof import('./composables/tray')['setTrayTooltip']
   const setTunFd: typeof import('./composables/instance')['setTunFd']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
@@ -340,6 +343,8 @@ declare global {
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const tauriApiWindow: typeof import('./composables/tauri')['tauriApiWindow']
   const tauriCloseWindow: typeof import('./composables/tauri')['tauriCloseWindow']
+  const tauriMinimizeWindow: typeof import('./composables/tauri')['tauriMinimizeWindow']
+  const tauriMinnisizeWindow: typeof import('./composables/tauri')['tauriMinnisizeWindow']
   const templateRef: typeof import('@vueuse/core')['templateRef']
   const throttledRef: typeof import('@vueuse/core')['throttledRef']
   const throttledWatch: typeof import('@vueuse/core')['throttledWatch']
@@ -515,6 +520,7 @@ declare global {
   const useToast: typeof import('./components/ui/toast/use-toast')['useToast']
   const useToggle: typeof import('@vueuse/core')['useToggle']
   const useTransition: typeof import('@vueuse/core')['useTransition']
+  const useTray: typeof import('./composables/tray')['useTray']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia']
   const useVModel: typeof import('@vueuse/core')['useVModel']
@@ -875,6 +881,9 @@ declare module 'vue' {
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setLogLevel: UnwrapRef<typeof import('./composables/instance')['setLogLevel']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
+    readonly setTrayMenu: UnwrapRef<typeof import('./composables/tray')['setTrayMenu']>
+    readonly setTrayRunState: UnwrapRef<typeof import('./composables/tray')['setTrayRunState']>
+    readonly setTrayTooltip: UnwrapRef<typeof import('./composables/tray')['setTrayTooltip']>
     readonly setTunFd: UnwrapRef<typeof import('./composables/instance')['setTunFd']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
@@ -885,6 +894,7 @@ declare module 'vue' {
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly tauriCloseWindow: UnwrapRef<typeof import('./composables/tauri')['tauriCloseWindow']>
+    readonly tauriMinimizeWindow: UnwrapRef<typeof import('./composables/tauri')['tauriMinimizeWindow']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
     readonly throttledRef: UnwrapRef<typeof import('@vueuse/core')['throttledRef']>
     readonly throttledWatch: UnwrapRef<typeof import('@vueuse/core')['throttledWatch']>
@@ -1060,6 +1070,7 @@ declare module 'vue' {
     readonly useToast: UnwrapRef<typeof import('./components/ui/toast/use-toast')['useToast']>
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
+    readonly useTray: UnwrapRef<typeof import('./composables/tray')['useTray']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>
     readonly useVModel: UnwrapRef<typeof import('@vueuse/core')['useVModel']>
